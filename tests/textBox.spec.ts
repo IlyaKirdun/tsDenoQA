@@ -29,8 +29,10 @@ test.describe('Check the functioning of the "Text Box" section', () => {
   })
 
   test('CASE_1: Verify field of inputs in page', async () => {
+    test.setTimeout(3000)
     await test.step(`Fill the "Full Name" input field with ${testData.name}`, async () => {
       await textBoxPage.fillInputByName(testData.name, textBoxPage.fullNameInput)
+
     })
 
     await test.step(`Fill the "Email" input field with ${testData.email}`, async () => {

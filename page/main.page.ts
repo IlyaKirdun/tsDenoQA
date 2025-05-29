@@ -7,8 +7,8 @@ export default class MainPage {
     this.page = page
   }
 
-  async gotoPage(): Promise<void> {
-    await this.page.goto('https://demoqa.com')
+  async gotoMainPage(): Promise<void> {
+    await this.page.goto('https://demoqa.com', { waitUntil: 'domcontentloaded' })
   }
 
   async gotoCard(keyWordFromLocator: string): Promise<void> {

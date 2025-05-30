@@ -1,0 +1,186 @@
+Check functionality of "Check Box" page.
+
+Verify functionality of "Check Box" page:
+
+Test Case 1: Verify of expand all folders in page.
+Preconditions:
+- Open the browser and navigate to 'https://demoqa.com/'.
+- Select "Elements", then click "Check Box" from the navigation bar.
+
+Steps:
+1. Click of expand button "+".
+Expected result:
+- Folders expanded.
+
+Postconditions:
+- Close the browser.
+
+---
+
+Test Case 2: Verify of collapse all folders in page.
+Preconditions:
+- Open the browser and navigate to 'https://demoqa.com/'.
+- Select "Elements", then click "Check Box" from the navigation bar.
+- Click of expand button "+".
+
+Steps:
+1. Click of collapse button "-".
+Expected result:
+- Folders collapsed.
+
+Postconditions:
+- Close the browser.
+
+---
+
+Test Case 3: Verify expand folders in page.
+Preconditions:
+- Open the browser and navigate to 'https://demoqa.com/'.
+- Select "Elements", then click "Check Box" from the navigation bar.
+
+Steps:
+1. Click of expand button the folder "Home"
+Expected result:
+- drop-down list of folder: Desktop, Document, Downloads.
+
+2. Click of expand button the folder "Desktop".
+Expected result:
+- drop-down list of folder: Notes, Commands.
+
+3. Click of expand button the folder "Document".
+Expected result:
+- drop-down list of folder: WorkSpace, Office.
+
+4. Click of expand button the folder "WorkSpace"
+Expected result:
+- drop-down list of folder: React, Angular, Veu.
+
+5. Click of expand button the folder "Office"
+Expected result:
+- drop-down list of folder: Public, Private, Classified, General.
+
+6. Click of expand button the folder "Downloads"
+Expected result:
+- drop-down list of folder: Word File.doc , Excel File.doc .
+
+Postconditions:
+- Close the browser.
+
+---
+
+Test Case 4: Verify collapse folders in page.
+Preconditions:
+- Open the browser and navigate to 'https://demoqa.com/'.
+- Select "Elements", then click "Check Box" from the navigation bar.
+- Click expand button "+".
+
+Steps:
+1. Click of collapse button the folder "Downloads"
+Expected result:
+- Folder hidden.
+
+2. Click of collapse button the folder "Office"
+Expected result:
+- Folder hidden.
+
+3. Click of collapse button the folder "WorkSpace"
+Expected result:
+- Folder hidden.
+
+4. Click of collapse button the folder "Document".
+Expected result:
+- Folder hidden.
+
+5. Click of collapse button the folder "Desktop".
+Expected result:
+- Folder hidden.
+
+6. Click of collapse button the folder "Home"
+Expected result:
+- Folder hidden.
+
+Postconditions:
+- Close the browser.
+
+---
+
+Test Case 5: Verify of select all folders in page.
+Preconditions:
+- Open the browser and navigate to 'https://demoqa.com/'.
+- Select "Elements", then click "Check Box" from the navigation bar.
+
+Steps:
+1. Click of checkbox the folder "Home".
+Expected result:
+- Checkboxes is selected.
+- You have selected : home, desktop, notes, commands, documents, workspace,
+  react, angular, veu, office, public, private, classified, general, downloads,
+  wordFile, excelFile.
+
+Postconditions:
+- Close the browser.
+
+---
+
+Test Case 6: Verify of unselecte all folders oif page.
+Preconditions:
+- Open the browser and navigate to 'https://demoqa.com/'.
+- Select "Elements", then click "Check Box" from the navigation bar.
+- Click of checkbox the folder "Home".
+
+Steps:
+1. Click of checkbox the folder "Home".
+Expected result:
+- Checkboxes unselected.
+
+Postconditions:
+- Close the browser.
+
+---
+
+Test Case 7: Verify of select folder "Desktop" and file "React" in page.
+Preconditions:
+- Open the browser and navigate to 'https://demoqa.com/'.
+- Select "Elements", then click "Check Box" from the navigation bar.
+- Click expand button "+".
+
+Steps.
+1. Click of checkbox the folder "Desktop".
+Expected result:
+- Folder selected with files inside.
+- You have selected: desktop, notes, commands.
+
+2. Click of checkbox the file "React".
+Expected result:
+- File selected.
+- You have selected: desktop, notes, commands, react.
+
+Postconditions:
+- Close the browser.
+
+---
+
+Test Case 8: Verify of unselect folder "Desktop" and file "React" in page.
+Preconditions:
+- Open the browser and navigate to 'https://demoqa.com/'.
+- Select "Elements", then click "Check Box" from the navigation bar.
+- Click expand button "+".
+- Click of checkbox the folder "Desktop".
+- Click of checkbox the file "React".
+
+Steps.
+1. Click of checkbox the folder "Desktop".
+Expected result:
+- Folder unselected.
+- You have selected: react.
+
+2. Click of checkbox the file "React".
+Expected result:
+- File unselected.
+
+Postconditions:
+- Close the browser.
+
+---
+
+

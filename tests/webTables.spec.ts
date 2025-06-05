@@ -29,6 +29,15 @@ test.describe('Проверка функциональности на стран
     department: 'Insurance'
   }
 
+  const firstUserBeforeSorting: { [key: string]: string } = {
+    firstName: '',
+    lastName: '',
+    age: '',
+    email: '',
+    salary: '',
+    department: ''
+  }
+
   test.beforeEach(async ({ page }) => {
     mainPage = new MainPage(page)
     webTablesPage = new WebTablesPage(page)
@@ -281,6 +290,86 @@ test.describe('Проверка функциональности на стран
     await test.step('Проверяем результат поиска.', async () => {
       let currentEmailUser = await webTablesPage.getUserData(testDataExistingUser['email'], 'email')
       await webTablesPage.isUserDataMatch(testDataExistingUser['email'], currentEmailUser)
+    })
+  })
+
+  test('CASE_7: Проверка функционала сортировки в таблице.', async () => {
+    await test.step('Сохраняем "First Name" пользователя из первой строки.', async () => {
+      firstUserBeforeSorting['firstName'] = await webTablesPage.getFirstUserData('firstName')
+    })
+
+    await test.step('Нажимаем ячейку сортировки "First Name".', async () => {
+      await webTablesPage.clickOnSortingCell('firstName')
+    })
+
+    await test.step('Сравниваем текущего пользователя в первой строке, с сохраненным.', async () => {
+      let currentUserAfterSorting = await webTablesPage.getFirstUserData('firstName')
+      await webTablesPage.isUserNotDataMatch(firstUserBeforeSorting['firstName'], currentUserAfterSorting)
+    })
+
+    await test.step('Сохраняем "Last Name" пользователя из первой строки.', async () => {
+      firstUserBeforeSorting['lastName'] = await webTablesPage.getFirstUserData('lastName')
+    })
+
+    await test.step('Нажимаем ячейку сортировки "Last Name".', async () => {
+      await webTablesPage.clickOnSortingCell('lastName')
+    })
+
+    await test.step('Сравниваем текущего пользователя в первой строке, с сохраненным.', async () => {
+      let currentUserAfterSorting = await webTablesPage.getFirstUserData('lastName')
+      await webTablesPage.isUserNotDataMatch(firstUserBeforeSorting['lastName'], currentUserAfterSorting)
+    })
+
+    await test.step('Сохраняем "Age" пользователя из первой строки.', async () => {
+      firstUserBeforeSorting['age'] = await webTablesPage.getFirstUserData('age')
+    })
+
+    await test.step('Нажимаем ячейку сортировки "Age".', async () => {
+      await webTablesPage.clickOnSortingCell('age')
+    })
+
+    await test.step('Сравниваем текущего пользователя в первой строке, с сохраненным.', async () => {
+      let currentUserAfterSorting = await webTablesPage.getFirstUserData('age')
+      await webTablesPage.isUserNotDataMatch(firstUserBeforeSorting['age'], currentUserAfterSorting)
+    })
+
+    await test.step('Сохраняем "Email" пользователя из первой строки.', async () => {
+      firstUserBeforeSorting['email'] = await webTablesPage.getFirstUserData('email')
+    })
+
+    await test.step('Нажимаем ячейку сортировки "Email".', async () => {
+      await webTablesPage.clickOnSortingCell('email')
+    })
+
+    await test.step('Сравниваем текущего пользователя в первой строке, с сохраненным.', async () => {
+      let currentUserAfterSorting = await webTablesPage.getFirstUserData('email')
+      await webTablesPage.isUserNotDataMatch(firstUserBeforeSorting['email'], currentUserAfterSorting)
+    })
+
+    await test.step('Сохраняем "Salary" пользователя из первой строки.', async () => {
+      firstUserBeforeSorting['salary'] = await webTablesPage.getFirstUserData('salary')
+    })
+
+    await test.step('Нажимаем ячейку сортировки "Salary".', async () => {
+      await webTablesPage.clickOnSortingCell('salary')
+    })
+
+    await test.step('Сравниваем текущего пользователя в первой строке, с сохраненным.', async () => {
+      let currentUserAfterSorting = await webTablesPage.getFirstUserData('salary')
+      await webTablesPage.isUserNotDataMatch(firstUserBeforeSorting['salary'], currentUserAfterSorting)
+    })
+
+    await test.step('Сохраняем "Department" пользователя из первой строки.', async () => {
+      firstUserBeforeSorting['department'] = await webTablesPage.getFirstUserData('department')
+    })
+
+    await test.step('Нажимаем ячейку сортировки "Department".', async () => {
+      await webTablesPage.clickOnSortingCell('department')
+    })
+
+    await test.step('Сравниваем текущего пользователя в первой строке, с сохраненным.', async () => {
+      let currentUserAfterSorting = await webTablesPage.getFirstUserData('department')
+      await webTablesPage.isUserNotDataMatch(firstUserBeforeSorting['department'], currentUserAfterSorting)
     })
   })
 })

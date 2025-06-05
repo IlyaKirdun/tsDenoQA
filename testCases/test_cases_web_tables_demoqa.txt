@@ -39,7 +39,7 @@ Steps:
 Expected result:
 - Окно открыто.
 
-2. Заполняем поле "First Name", вводим firstName из $testDataFromCreateUser.
+2. Заполняем поле "First Name", вводим firstName из $testDataForCreateUser.
 Expected result:
 - Поле заполнено нашим firstName.
 
@@ -47,7 +47,7 @@ Expected result:
 Expected result:
 - Поле отображает firstName корректно.
 
-4. Заполняем поле "Last Name", вводим lastName из $testDataFromCreateUser.
+4. Заполняем поле "Last Name", вводим lastName из $testDataForCreateUser.
 Expected result:
 - Поле заполнено нашим lastName.
 
@@ -55,7 +55,7 @@ Expected result:
 Expected result:
 - Поле отображает lastName корректно.
 
-6. Заполняем поле "Email", вводим email из $testDataFromCreateUser.
+6. Заполняем поле "Email", вводим email из $testDataForCreateUser.
 Expected result:
 - Поле заполнено нашим email.
 
@@ -63,7 +63,7 @@ Expected result:
 Expected result:
 - Поле отображает email корректно.
 
-8. Заполняем поле "Age", вводим age из $testDataFromCreateUser.
+8. Заполняем поле "Age", вводим age из $testDataForCreateUser.
 Expected result:
 - Поле заполнено нашим age.
 
@@ -71,7 +71,7 @@ Expected result:
 Expected result:
 - Поле отображает age корректно.
 
-10. Заполняем поле "Salary", вводим salary из $testDataFromCreateUser.
+10. Заполняем поле "Salary", вводим salary из $testDataForCreateUser.
 Expected result:
 - Поле заполнено нашим salary.
 
@@ -79,7 +79,7 @@ Expected result:
 Expected result:
 - Поле отображает salary корректно.
 
-12. Заполняем поле "Department", вводим department из $testDataFromCreateUser.
+12. Заполняем поле "Department", вводим department из $testDataForCreateUser.
 Expected result:
 - Поле заполнено нашим department.
 
@@ -121,7 +121,7 @@ Preconditions:
 - Проверяем индикацию полей
 
 Steps:
-1. Заполняем поле "First Name", вводим firstName из $testDataFromCreateUser.
+1. Заполняем поле "First Name", вводим firstName из $testDataForCreateUser.
 Expected result:
 - Поле заполнено нашим firstName.
 
@@ -129,7 +129,7 @@ Expected result:
 Expected result:
 - Поле подсвечивается зеленым цветом.
 
-3. Заполняем поле "Last Name", вводим lastName из $testDataFromCreateUser.
+3. Заполняем поле "Last Name", вводим lastName из $testDataForCreateUser.
 Expected result:
 - Поле заполнено нашим lastName.
 
@@ -137,7 +137,7 @@ Expected result:
 Expected result:
 - Поле подсвечивается зеленым цветом.
 
-5. Заполняем поле "Email", вводим email из $testDataFromCreateUser.
+5. Заполняем поле "Email", вводим email из $testDataForCreateUser.
 Expected result:
 - Поле заполнено нашим email.
 
@@ -145,7 +145,7 @@ Expected result:
 Expected result:
 - Поле подсвечивается зеленым цветом.
 
-7. Заполняем поле "Age", вводим age из $testDataFromCreateUser.
+7. Заполняем поле "Age", вводим age из $testDataForCreateUser.
 Expected result:
 - Поле заполнено нашим age.
 
@@ -153,7 +153,7 @@ Expected result:
 Expected result:
 - Поле подсвечивается зеленым цветом.
 
-9. Заполняем поле "Salary", вводим salary из $testDataFromCreateUser.
+9. Заполняем поле "Salary", вводим salary из $testDataForCreateUser.
 Expected result:
 - Поле заполнено нашим salary.
 
@@ -161,7 +161,7 @@ Expected result:
 Expected result:
 - Поле подсвечивается зеленым цветом.
 
-11. Заполняем поле "Department", вводим department из $testDataFromCreateUser.
+11. Заполняем поле "Department", вводим department из $testDataForCreateUser.
 Expected result:
 - Поле заполнено нашим department.
 
@@ -184,27 +184,27 @@ Steps:
 Expected result:
 - Кнопка нажата.
 
-2. Заполняем поле "First Name", вводим firstName из $testDataFromCreateUser.
+2. Заполняем поле "First Name", вводим firstName из $testDataForCreateUser.
 Expected result:
 - Поле заполнено нашим firstName.
 
-3. Заполняем поле "Last Name", вводим lastName из $testDataFromCreateUser.
+3. Заполняем поле "Last Name", вводим lastName из $testDataForCreateUser.
 Expected result:
 - Поле заполнено нашим lastName.
 
-4. Заполняем поле "Email", вводим email из $testDataFromCreateUser.
+4. Заполняем поле "Email", вводим email из $testDataForCreateUser.
 Expected result:
 - Поле заполнено нашим email.
 
-5. Заполняем поле "Age", вводим age из $testDataFromCreateUser.
+5. Заполняем поле "Age", вводим age из $testDataForCreateUser.
 Expected result:
 - Поле заполнено нашим age.
 
-6. Заполняем поле "Salary", вводим salary из $testDataFromCreateUser.
+6. Заполняем поле "Salary", вводим salary из $testDataForCreateUser.
 Expected result:
 - Поле заполнено нашим salary.
 
-7. Заполняем поле "Department", вводим department из $testDataFromCreateUser.
+7. Заполняем поле "Department", вводим department из $testDataForCreateUser.
 Expected result:
 - Поле заполнено нашим department.
 
@@ -212,27 +212,27 @@ Expected result:
 Expected result:
 - В таблицу добавлен пользователь.
 
-9. Получаем данные ячейки "First Name" и сверяем с firstName из $testDataFromCreateUser.
+9. Получаем данные ячейки "First Name" и сверяем с firstName из $testDataForCreateUser.
 Expected result:
 - Данные совпадают.
 
-10. Получаем данные ячейки "Last Name" и сверяем с lastName из $testDataFromCreateUser.
+10. Получаем данные ячейки "Last Name" и сверяем с lastName из $testDataForCreateUser.
 Expected result:
 - Данные совпадают.
 
-11. Получаем данные ячейки "Age" и сверяем с age из $testDataFromCreateUser.
+11. Получаем данные ячейки "Age" и сверяем с age из $testDataForCreateUser.
 Expected result:
 - Данные совпадают.
 
-12. Получаем данные ячейки "Email" и сверяем с email из $testDataFromCreateUser.
+12. Получаем данные ячейки "Email" и сверяем с email из $testDataForCreateUser.
 Expected result:
 - Данные совпадают.
 
-13. Получаем данные ячейки "Salary" и сверяем с salary из $testDataFromCreateUser.
+13. Получаем данные ячейки "Salary" и сверяем с salary из $testDataForCreateUser.
 Expected result:
 - Данные совпадают.
 
-14. Получаем данные ячейки "Department" и сверяем с department из $testDataFromCreateUser.
+14. Получаем данные ячейки "Department" и сверяем с department из $testDataForCreateUser.
 Expected result:
 - Данные совпадают.
 
@@ -267,21 +267,77 @@ Preconditions:
 - Перейти в "Elements", затем нажать на "Web Tables" в меню навигации.
 
 Steps:
-1. Сохраняем имя пользователя "Cierra Vega" из первой строки.
+1. Сохраняем "First Name" и "Email" пользователя из первой строки.
 Expected result:
-- Имя "Cierra" сохранено.
+- Ячейка "Cierra" сохранено.
 
 2. Нажимаем ячейку сортировки "First Name".
 Expected result:
 - Поле выделено.
 
-3. Сохраняем имя пользователя "Alden Cantrell" из первой строки.
+3. Сравниваем текущего пользователся в первой строке, с сохраненным.
 Expected result:
-- Имя "Alden" сохранено.
+- Пользователи не совпадают.
 
-4. Сравниваем сохраненные имена.
+4. Сохраняем "Last Name" пользователя из первой строки.
+Expected result:
+- Ячейка "Vega" сохранена.
+
+5. Нажимаем ячейку сортировки "Last Name".
+Expected result:
+- Поле выделено.
+
+6. Сравниваем текущего пользователся в первой строке, с сохраненным.
+Expected result:
+- Пользователи не совпадают.
+
+7. Сохраняем "Age" пользователя из первой строки.
+Expected result:
+- Ячейка "39" сохранена.
+
+8. Нажимаем ячейку сортировки "Age".
+Expected result:
+- Поле выделено.
+
+9. Сравниваем текущего пользователся в первой строке, с сохраненным.
 Expected result:
 - Имена не совпадают.
+
+10. Сохраняем "Email" пользователя из первой строки.
+Expected result:
+- Ячейка "cierra@example.com" сохранена.
+
+11. Нажимаем ячейку сортировки "Email".
+Expected result:
+- Поле выделено.
+
+12. Сравниваем текущего пользователся в первой строке, с сохраненным.
+Expected result:
+- Пользователи не совпадают.
+
+13. Сохраняем "Salary" пользователя из первой строки.
+Expected result:
+- Ячейка "10000" сохранена.
+
+14. Нажимаем ячейку сортировки "Salary".
+Expected result:
+- Поле выделено.
+
+15. Сравниваем текущего пользователся в первой строке, с сохраненным.
+Expected result:
+- Пользователи не совпадают.
+
+16. Сохраняем "Department" пользователя из первой строки.
+Expected result:
+- Ячейка "Insurance" сохранена.
+
+17. Нажимаем ячейку сортировки "Department".
+Expected result:
+- Поле выделено.
+
+18. Сравниваем текущего пользователся в первой строке, с сохраненным.
+Expected result:
+- Пользователи не совпадают.
 
 Post-condition:
 - Закрываем браузер.

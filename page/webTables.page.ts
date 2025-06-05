@@ -34,7 +34,8 @@ export default class WebTablesPage {
       salary: 5,
       department: 6
     }
-    const cellContent: string | null = await this.page.locator(`//div[text()="${userEmail}"]/parent::div//div[@class="rt-td"][${keyWordFromUserLocator[cellNames]}]`).textContent()
+    const cellContent: string | null = await this.page.locator(`//div[text()="${userEmail}"]
+    /parent::div//div[@class="rt-td"][${keyWordFromUserLocator[cellNames]}]`).textContent()
     if (cellContent === null) {
       process.exit(1)
     }
@@ -46,7 +47,43 @@ export default class WebTablesPage {
     expect(expectUserData).toBe(currentUserData)
   }
 
+  async isUserNotDataMatch(expectUserData: string, currentUserData: string): Promise<void> {
+    expect(expectUserData).not.toBe(currentUserData)
+  }
+
   async fillSearchInput(userData: string): Promise<void> {
     await this.searchInput.fill(userData)
+  }
+
+  async clickOnSortingCell(cellName: string): Promise<void> {
+    const keyWordFromCellLocator: { [key: string]: number} = {
+      firstName: 1,
+      lastName: 2,
+      age: 3,
+      email: 4,
+      salary: 5,
+      department: 6
+    }
+    await this.page.locator(`//div[@class="rt-tr"]
+    //div[@class="rt-th rt-resizable-header -cursor-pointer"][${keyWordFromCellLocator[cellName]}]`).click()
+  }
+
+  async getFirstUserData(cellName: string): Promise<string> {
+    const keyWordFromCellUserData: { [key: string]: number} = {
+      firstName: 1,
+      lastName: 2,
+      age: 3,
+      email: 4,
+      salary: 5,
+      department: 6
+    }
+    const cellContent: string | null = await this.page.locator(`
+    //div[@class="rt-tr-group"][1]//div[@class="rt-td"][${keyWordFromCellUserData[cellName]}]`).textContent()
+
+    if (cellContent === null) {
+      process.exit(1)
+    }
+
+    return cellContent
   }
 }

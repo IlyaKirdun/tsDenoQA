@@ -11,13 +11,22 @@ test.describe('Check the functioning of the "Text Box" section', () => {
   let webTablesPage: WebTablesPage
   let registrationModalWindow: RegistrationModalWindow
 
-  const testDataFromCreateUser: { [key: string]: string} = {
+  const testDataForCreateUser: { [key: string]: string} = {
     firstName: 'Ivan',
     lastName: 'Ivanov',
     email: 'Ivanovich@gmail.com',
     age: '25',
     salary: '25000',
     department: 'QA'
+  }
+
+  const testUserDataForSearch: { [key: string]: string} = {
+    firstName: 'Cierra',
+    lastName: 'Vega',
+    age: '39',
+    email: 'cierra@example.com',
+    salary: '10000',
+    department: 'Insurance'
   }
 
   test.beforeEach(async ({ page }) => {
@@ -59,51 +68,51 @@ test.describe('Check the functioning of the "Text Box" section', () => {
     })
 
     await test.step(`Заполняем поле "First Name".`, async () => {
-      await registrationModalWindow.fillInputInModalWindow('First Name', testDataFromCreateUser['firstName'])
+      await registrationModalWindow.fillInputInModalWindow('First Name', testDataForCreateUser['firstName'])
     })
 
     await test.step(`Проверяем поле на корректное отображение.`, async () => {
-      await registrationModalWindow.isInputDataCorrectInModalWindow('First Name', testDataFromCreateUser["firstName"])
+      await registrationModalWindow.isInputDataCorrectInModalWindow('First Name', testDataForCreateUser["firstName"])
     })
 
     await test.step(`Заполняем поле "Last Name".`, async () => {
-      await registrationModalWindow.fillInputInModalWindow('Last Name', testDataFromCreateUser['lastName'])
+      await registrationModalWindow.fillInputInModalWindow('Last Name', testDataForCreateUser['lastName'])
     })
 
     await test.step(`Проверяем поле на корректное отображение.`, async () => {
-      await registrationModalWindow.isInputDataCorrectInModalWindow('Last Name', testDataFromCreateUser['lastName'])
+      await registrationModalWindow.isInputDataCorrectInModalWindow('Last Name', testDataForCreateUser['lastName'])
     })
 
     await test.step(`Заполняем поле "Email".`, async () => {
-      await registrationModalWindow.fillInputInModalWindow('name@example.com', testDataFromCreateUser['email'])
+      await registrationModalWindow.fillInputInModalWindow('name@example.com', testDataForCreateUser['email'])
     })
 
     await test.step(`Проверяем поле на корректное отображение.`, async () => {
-      await registrationModalWindow.isInputDataCorrectInModalWindow('name@example.com', testDataFromCreateUser['email'])
+      await registrationModalWindow.isInputDataCorrectInModalWindow('name@example.com', testDataForCreateUser['email'])
     })
 
     await test.step(`Заполняем поле "Age".`, async () => {
-      await registrationModalWindow.fillInputInModalWindow('Age', testDataFromCreateUser['age'])
+      await registrationModalWindow.fillInputInModalWindow('Age', testDataForCreateUser['age'])
     })
 
     await test.step(`Проверяем поле на корректное отображение.`, async () => {
-      await registrationModalWindow.isInputDataCorrectInModalWindow('Age', testDataFromCreateUser['age'])
+      await registrationModalWindow.isInputDataCorrectInModalWindow('Age', testDataForCreateUser['age'])
     })
 
     await test.step(`Заполняем поле "Salary".`, async () => {
-      await registrationModalWindow.fillInputInModalWindow('Salary', testDataFromCreateUser['salary'])
+      await registrationModalWindow.fillInputInModalWindow('Salary', testDataForCreateUser['salary'])
     })
 
     await test.step(`Проверяем поле на корректное отображение.`, async () => {
-      await registrationModalWindow.isInputDataCorrectInModalWindow('Salary', testDataFromCreateUser['salary'])
+      await registrationModalWindow.isInputDataCorrectInModalWindow('Salary', testDataForCreateUser['salary'])
     })
 
     await test.step(`Заполняем поле "Department".`, async () => {
-      await registrationModalWindow.fillInputInModalWindow('Department', testDataFromCreateUser['department'])
+      await registrationModalWindow.fillInputInModalWindow('Department', testDataForCreateUser['department'])
     })
 
     await test.step(`Проверяем поле на корректное отображение.`, async () => {
-      await registrationModalWindow.isInputDataCorrectInModalWindow('Department', testDataFromCreateUser['department'])
+      await registrationModalWindow.isInputDataCorrectInModalWindow('Department', testDataForCreateUser['department'])
     })
   })
 
@@ -136,7 +145,7 @@ test.describe('Check the functioning of the "Text Box" section', () => {
     })
 
     await test.step(`Заполняем поле "First Name".`, async () => {
-      await registrationModalWindow.fillInputInModalWindow('First Name', testDataFromCreateUser['firstName'])
+      await registrationModalWindow.fillInputInModalWindow('First Name', testDataForCreateUser['firstName'])
     })
 
     await test.step(`Проверяем состояние поля.`, async () => {
@@ -145,7 +154,7 @@ test.describe('Check the functioning of the "Text Box" section', () => {
     })
 
     await test.step(`Заполняем поле "Last Name".`, async () => {
-      await registrationModalWindow.fillInputInModalWindow('Last Name', testDataFromCreateUser['lastName'])
+      await registrationModalWindow.fillInputInModalWindow('Last Name', testDataForCreateUser['lastName'])
     })
 
     await test.step(`Проверяем состояние поля.`, async () => {
@@ -154,7 +163,7 @@ test.describe('Check the functioning of the "Text Box" section', () => {
     })
 
     await test.step(`Заполняем поле "Email".`, async () => {
-      await registrationModalWindow.fillInputInModalWindow('name@example.com', testDataFromCreateUser['email'])
+      await registrationModalWindow.fillInputInModalWindow('name@example.com', testDataForCreateUser['email'])
     })
 
     await test.step(`Проверяем состояние поля.`, async () => {
@@ -163,7 +172,7 @@ test.describe('Check the functioning of the "Text Box" section', () => {
     })
 
     await test.step(`Заполняем поле "Age".`, async () => {
-      await registrationModalWindow.fillInputInModalWindow('Age', testDataFromCreateUser['age'])
+      await registrationModalWindow.fillInputInModalWindow('Age', testDataForCreateUser['age'])
     })
 
     await test.step(`Проверяем состояние поля.`, async () => {
@@ -172,7 +181,7 @@ test.describe('Check the functioning of the "Text Box" section', () => {
     })
 
     await test.step(`Заполняем поле "Salary".`, async () => {
-      await registrationModalWindow.fillInputInModalWindow('Salary', testDataFromCreateUser['salary'])
+      await registrationModalWindow.fillInputInModalWindow('Salary', testDataForCreateUser['salary'])
     })
 
     await test.step(`Проверяем состояние поля.`, async () => {
@@ -181,7 +190,7 @@ test.describe('Check the functioning of the "Text Box" section', () => {
     })
 
     await test.step(`Заполняем поле "Department".`, async () => {
-      await registrationModalWindow.fillInputInModalWindow('Department', testDataFromCreateUser['department'])
+      await registrationModalWindow.fillInputInModalWindow('Department', testDataForCreateUser['department'])
     })
 
     await test.step(`Проверяем состояние поля.`, async () => {
@@ -196,27 +205,27 @@ test.describe('Check the functioning of the "Text Box" section', () => {
     })
 
     await test.step(`Заполняем поле "First Name".`, async () => {
-      await registrationModalWindow.fillInputInModalWindow('First Name', testDataFromCreateUser['firstName'])
+      await registrationModalWindow.fillInputInModalWindow('First Name', testDataForCreateUser['firstName'])
     })
 
     await test.step(`Заполняем поле "Last Name".`, async () => {
-      await registrationModalWindow.fillInputInModalWindow('Last Name', testDataFromCreateUser['lastName'])
+      await registrationModalWindow.fillInputInModalWindow('Last Name', testDataForCreateUser['lastName'])
     })
 
     await test.step(`Заполняем поле "Email".`, async () => {
-      await registrationModalWindow.fillInputInModalWindow('name@example.com', testDataFromCreateUser['email'])
+      await registrationModalWindow.fillInputInModalWindow('name@example.com', testDataForCreateUser['email'])
     })
 
     await test.step(`Заполняем поле "Age".`, async () => {
-      await registrationModalWindow.fillInputInModalWindow('Age', testDataFromCreateUser['age'])
+      await registrationModalWindow.fillInputInModalWindow('Age', testDataForCreateUser['age'])
     })
 
     await test.step(`Заполняем поле "Salary".`, async () => {
-      await registrationModalWindow.fillInputInModalWindow('Salary', testDataFromCreateUser['salary'])
+      await registrationModalWindow.fillInputInModalWindow('Salary', testDataForCreateUser['salary'])
     })
 
     await test.step(`Заполняем поле "Department".`, async () => {
-      await registrationModalWindow.fillInputInModalWindow('Department', testDataFromCreateUser['department'])
+      await registrationModalWindow.fillInputInModalWindow('Department', testDataForCreateUser['department'])
     })
 
     await test.step(`Нажимаем кнопку "Submit"`, async () => {
@@ -224,33 +233,33 @@ test.describe('Check the functioning of the "Text Box" section', () => {
     })
 
     await test.step(`Получаем и сравниваем данные ячейки имени пользователя`, async () => {
-      let currentFirstNameUser = await webTablesPage.getUserData(testDataFromCreateUser['email'], 'firstName')
-      await webTablesPage.isUserDataMatch(testDataFromCreateUser['firstName'], currentFirstNameUser)
+      let currentFirstNameUser = await webTablesPage.getUserData(testDataForCreateUser['email'], 'firstName')
+      await webTablesPage.isUserDataMatch(testDataForCreateUser['firstName'], currentFirstNameUser)
     })
 
     await test.step(`Получаем и сравниваем данные ячейки имени пользователя`, async () => {
-      let currentFirstNameUser = await webTablesPage.getUserData(testDataFromCreateUser['email'], 'lastName')
-      await webTablesPage.isUserDataMatch(testDataFromCreateUser['lastName'], currentFirstNameUser)
+      let currentFirstNameUser = await webTablesPage.getUserData(testDataForCreateUser['email'], 'lastName')
+      await webTablesPage.isUserDataMatch(testDataForCreateUser['lastName'], currentFirstNameUser)
     })
 
     await test.step(`Получаем и сравниваем данные ячейки имени пользователя`, async () => {
-      let currentFirstNameUser = await webTablesPage.getUserData(testDataFromCreateUser['email'], 'age')
-      await webTablesPage.isUserDataMatch(testDataFromCreateUser['age'], currentFirstNameUser)
+      let currentFirstNameUser = await webTablesPage.getUserData(testDataForCreateUser['email'], 'age')
+      await webTablesPage.isUserDataMatch(testDataForCreateUser['age'], currentFirstNameUser)
     })
 
     await test.step(`Получаем и сравниваем данные ячейки имени пользователя`, async () => {
-      let currentFirstNameUser = await webTablesPage.getUserData(testDataFromCreateUser['email'], 'email')
-      await webTablesPage.isUserDataMatch(testDataFromCreateUser['email'], currentFirstNameUser)
+      let currentFirstNameUser = await webTablesPage.getUserData(testDataForCreateUser['email'], 'email')
+      await webTablesPage.isUserDataMatch(testDataForCreateUser['email'], currentFirstNameUser)
     })
 
     await test.step(`Получаем и сравниваем данные ячейки имени пользователя`, async () => {
-      let currentFirstNameUser = await webTablesPage.getUserData(testDataFromCreateUser['email'], 'salary')
-      await webTablesPage.isUserDataMatch(testDataFromCreateUser['salary'], currentFirstNameUser)
+      let currentFirstNameUser = await webTablesPage.getUserData(testDataForCreateUser['email'], 'salary')
+      await webTablesPage.isUserDataMatch(testDataForCreateUser['salary'], currentFirstNameUser)
     })
 
     await test.step(`Получаем и сравниваем данные ячейки имени пользователя`, async () => {
-      let currentFirstNameUser = await webTablesPage.getUserData(testDataFromCreateUser['email'], 'department')
-      await webTablesPage.isUserDataMatch(testDataFromCreateUser['department'], currentFirstNameUser)
+      let currentFirstNameUser = await webTablesPage.getUserData(testDataForCreateUser['email'], 'department')
+      await webTablesPage.isUserDataMatch(testDataForCreateUser['department'], currentFirstNameUser)
     })
   })
 

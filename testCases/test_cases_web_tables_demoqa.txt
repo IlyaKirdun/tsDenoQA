@@ -35,7 +35,7 @@ Preconditions:
 - Нажимаем кнопку "Add".
 
 Steps:
-1. Заполняем поле "First Name", вводим firstName из $testDate.
+1. Заполняем поле "First Name", вводим firstName из $testDataFromCreateUser.
 Expected result:
 - Поле заполнено нашим firstName.
 
@@ -43,7 +43,7 @@ Expected result:
 Expected result:
 - Поле отображает firstName корректно.
 
-3. Заполняем поле "Last Name", вводим lastName из $testDate.
+3. Заполняем поле "Last Name", вводим lastName из $testDataFromCreateUser.
 Expected result:
 - Поле заполнено нашим lastName.
 
@@ -51,7 +51,7 @@ Expected result:
 Expected result:
 - Поле отображает lastName корректно.
 
-5. Заполняем поле "Email", вводим email из $testDate.
+5. Заполняем поле "Email", вводим email из $testDataFromCreateUser.
 Expected result:
 - Поле заполнено нашим email.
 
@@ -59,7 +59,7 @@ Expected result:
 Expected result:
 - Поле отображает email корректно.
 
-7. Заполняем поле "Age", вводим age из $testDate.
+7. Заполняем поле "Age", вводим age из $testDataFromCreateUser.
 Expected result:
 - Поле заполнено нашим age.
 
@@ -67,7 +67,7 @@ Expected result:
 Expected result:
 - Поле отображает age корректно.
 
-9. Заполняем поле "Salary", вводим salary из $testDate.
+9. Заполняем поле "Salary", вводим salary из $testDataFromCreateUser.
 Expected result:
 - Поле заполнено нашим salary.
 
@@ -75,7 +75,7 @@ Expected result:
 Expected result:
 - Поле отображает salary корректно.
 
-11. Заполняем поле "Department", вводим department из $testDate.
+11. Заполняем поле "Department", вводим department из $testDataFromCreateUser.
 Expected result:
 - Поле заполнено нашим department.
 
@@ -117,7 +117,7 @@ Preconditions:
 - Проверяем индикацию полей
 
 Steps:
-1. Заполняем поле "First Name", вводим firstName из $testDate.
+1. Заполняем поле "First Name", вводим firstName из $testDataFromCreateUser.
 Expected result:
 - Поле заполнено нашим firstName.
 
@@ -125,7 +125,7 @@ Expected result:
 Expected result:
 - Поле подсвечивается зеленым цветом.
 
-3. Заполняем поле "Last Name", вводим lastName из $testDate.
+3. Заполняем поле "Last Name", вводим lastName из $testDataFromCreateUser.
 Expected result:
 - Поле заполнено нашим lastName.
 
@@ -133,7 +133,7 @@ Expected result:
 Expected result:
 - Поле подсвечивается зеленым цветом.
 
-5. Заполняем поле "Email", вводим email из $testDate.
+5. Заполняем поле "Email", вводим email из $testDataFromCreateUser.
 Expected result:
 - Поле заполнено нашим email.
 
@@ -141,7 +141,7 @@ Expected result:
 Expected result:
 - Поле подсвечивается зеленым цветом.
 
-7. Заполняем поле "Age", вводим age из $testDate.
+7. Заполняем поле "Age", вводим age из $testDataFromCreateUser.
 Expected result:
 - Поле заполнено нашим age.
 
@@ -149,7 +149,7 @@ Expected result:
 Expected result:
 - Поле подсвечивается зеленым цветом.
 
-9. Заполняем поле "Salary", вводим salary из $testDate.
+9. Заполняем поле "Salary", вводим salary из $testDataFromCreateUser.
 Expected result:
 - Поле заполнено нашим salary.
 
@@ -157,7 +157,7 @@ Expected result:
 Expected result:
 - Поле подсвечивается зеленым цветом.
 
-5. Заполняем поле "Department", вводим department из $testDate.
+11. Заполняем поле "Department", вводим department из $testDataFromCreateUser.
 Expected result:
 - Поле заполнено нашим department.
 
@@ -176,121 +176,134 @@ Preconditions:
 - Перейти в "Elements", затем нажать на "Web Tables" в меню навигации.
 
 Steps:
-1. Нажать кнопку "Add".
+1. Нажимаем кнопку "Submit".
 Expected result:
-- Открывается модальное окно.
+- Кнопка нажата.
 
-2. Заполняем поле "First Name" данными из $testDate.
+2. Заполняем поле "First Name", вводим firstName из $testDataFromCreateUser.
 Expected result:
-- Поле заполнено.
+- Поле заполнено нашим firstName.
 
-3. Заполняем поле "Last Name" данными из $testDate.
+3. Заполняем поле "Last Name", вводим lastName из $testDataFromCreateUser.
 Expected result:
-- Поле заполнено.
+- Поле заполнено нашим lastName.
 
-4. Заполняем поле "Email" данными из $testDate.
+4. Заполняем поле "Email", вводим email из $testDataFromCreateUser.
 Expected result:
-- Поле заполнено.
+- Поле заполнено нашим email.
 
-5. Заполняем поле "Age" данными из $testDate.
+5. Заполняем поле "Age", вводим age из $testDataFromCreateUser.
 Expected result:
-- Поле заполнено.
+- Поле заполнено нашим age.
 
-6. Заполняем поле "Salary" данными из $testDate.
+6. Заполняем поле "Salary", вводим salary из $testDataFromCreateUser.
 Expected result:
-- Поле заполнено.
+- Поле заполнено нашим salary.
 
-7. Заполняем поле "Department" данными из $testDate.
+7. Заполняем поле "Department", вводим department из $testDataFromCreateUser.
 Expected result:
-- Поле заполнено.
+- Поле заполнено нашим department.
 
-8. Нажать кнопку "Submit".
+8. Нажимаем кнопку "Submit".
 Expected result:
 - В таблицу добавлен пользователь.
 
-9. Получаем и проверяем данные ячеек пользователя.
+9. Получаем данные ячееки "First Name" и сверяем с firstName из $testDataFromCreateUser.
 Expected result:
 - Данные совпадают.
 
 Post-condition:
-- Закрыть браузер.
+- Закрываем браузер.
 
 ---
 
-Test Case 6: Проверка функционала поиска в таблице.
+Test Case 6: Проверка функционала поиска пользователя в таблице.
 Preconditions:
 - Открыть браузер и перейти на 'https://demoqa.com/'.
 - Перейти в "Elements", затем нажать на "Web Tables" в меню навигации.
 
 Steps:
-1. Написать в поле поиска - "Cierra".
+1. Заполняем в поле поиска - email пользователя из $testUserDataForSearch.
 Expected result:
-- Поле заполнено.
+- Поле заполнено нашим email.
 
-2. Проверяем поле на корректное отображение.
+2. Проверяем поле поиска на корректное отображение email.
 Expected result:
-- Поле отображается корректно.
+- Поле отображает email корректно.
 
 3. Проверяем результат поиска.
 Expected result:
-- В таблице отображается пользователь.
+- В таблице отображается пользователь:
+  Cierra | Vega | 39 | cierra@example.com | 10000 | Insurance.
 
 Post-condition:
-- Закрыть браузер.
+- Закрываем браузер.
 
 ---
 
-Test Case 7: Проверка функционала сортировки по имени в таблице.
+Test Case 7: Проверка функционала сортировки в таблице.
 Preconditions:
 - Открыть браузер и перейти на 'https://demoqa.com/'.
 - Перейти в "Elements", затем нажать на "Web Tables" в меню навигации.
 
 Steps:
-1. Сохраняем имя пользователя из первой строки.
+1. Сохраняем имя пользователя "Cierra Vega" из первой строки.
 Expected result:
-- Имя сохранено.
+- Имя "Cierra" сохранено.
 
-2. Нажать на поле сортировки "First Name".
+2. Нажимаем ячейку сортировки "First Name".
 Expected result:
 - Поле выделено.
 
-3. Сохраняем имя пользователя из первой строки.
+3. Сохраняем имя пользователя "Alden Cantrell" из первой строки.
 Expected result:
-- Имя сохранено.
+- Имя "Alden" сохранено.
 
-4. Сравниваем результат сортировки с начальными данными.
+4. Сравниваем сохраненные имена.
 Expected result:
 - Имена не совпадают.
 
 Post-condition:
-- Закрыть браузер.
+- Закрываем браузер.
 
 ---
 
-Test Case 8: Проверка функционала редактирования пользователя в таблице.
+Test Case 8: Проверка функционала редактирования пользователя "Cierra Vega".
 Preconditions:
 - Открыть браузер и перейти на 'https://demoqa.com/'.
 - Перейти в "Elements", затем нажать на "Web Tables" в меню навигации.
 
 Steps:
-1. Нажать на кнопку "Edit".
+1. Нажимаем на кнопку "Edit" у пользователя "Cierra Vega".
 Expected result:
-- Открылось модальное окно.
+- Кнопка нажата.
 
-2. Изменяем в поле "First Name" значение.
+2. Проряем что модальное окно отображается.
 Expected result:
-- Поле изменено.
+- Мадальное окно отображается.
 
-3. Нажимаем кнопку "Submit".
+3. Изменяем в поле "First Name" значение "Cierra" на firstName из $testDataForCreateUser.
 Expected result:
-- Закрывается модальное окно
+- Поле заполнено нашим firstName.
 
-4. Проверяем изменения данных у пользователся.
+4. Проверяем поле "First Name" на корректное отобрашение.
 Expected result:
-- Данные изменены.
+- Поле отображает firstName корректно.
+
+5. Нажимаем кнопку "Submit".
+Expected result:
+- Кнопка нажата.
+
+6. Проверяем что модальное окно закрылось.
+Expected result:
+- Модальное окно закрыто.
+
+7. Проверяем отображение измененых данных.
+Expected result:
+- Данные отображаются.
 
 Post-condition:
-- Закрыть браузер.
+- Закрываем браузер.
 
 ---
 
@@ -300,20 +313,20 @@ Preconditions:
 - Перейти в "Elements", затем нажать на "Web Tables" в меню навигации.
 
 Steps:
-1. Сохраняем имя пользователя в первой строке таблицы.
+1. Сохраняем ячейку "First Name" пользователя "Cierra Vega".
 Expected result:
-- Имя сохранено.
+- "First Name" сохранено.
 
-1. Нажать на кнопку "Delete" у первого пользователя.
+1. Нажимаем на кнопку "Delete" у пользователя "Cierra Vega".
 Expected result:
 - Пользователель удален.
 
-2. Проверка на отсутствие имени пользователя в таблице.
+2. Проверяем что пользователя с ячейкой "First Name" - "Cierra" нет в таблице.
 Expected result:
-- Пользователя с таким именем нет.
+- Пользователя нет.
 
 Post-condition:
-- Закрыть браузер.
+- Закрываем браузер.
 
 ---
 
@@ -324,16 +337,16 @@ Preconditions:
 - Удаляем пользователей из таблицы.
 
 Steps:
-1. Проверить отображение сообщения.
+1. Проверяем отображение сообщения.
 Expected result:
 - Строка с сообщением "No rows found" отображается.
 
 Post-condition:
-- Закрыть браузер.
+- Закрываем браузер.
 
 ---
 
-Test Case 11: Проверка функционала перехода на следующую страницу в таблице.
+Test Case 11: Проверка функционала пагинации в таблице.
 Preconditions:
 - Открыть браузер и перейти на 'https://demoqa.com/'.
 - Перейти в "Elements", затем нажать на "Web Tables" в меню навигации.
@@ -341,50 +354,36 @@ Preconditions:
 - Заготавливаем пользователей.
 
 Steps:
-1. Сохранить номер текущей страницы.
+1. Сохраняем номер текущей страницы.
 Expected result:
-- Номер сохранен.
+- Страница с номером "1" сохранена.
 
-2. Нажать на кнопку "Next".
-Expected result:
-- Страница таблицы изменилась.
-
-3. Проверить изменение номера страницы.
-Expected result:
-- Номер изменен.
-
-Post-condition:
-- Закрыть браузер.
-
----
-
-Test Case 12: Проверка функционала перехода на предыдущую страницу в таблице.
-Preconditions:
-- Открыть браузер и перейти на 'https://demoqa.com/'.
-- Перейти в "Elements", затем нажать на "Web Tables" в меню навигации.
-- Выбрать отображение в "5 rows"
-- Заготавливаем пользователей.
-- Нажать кнопку "Next".
-
-Steps:
-1. Сохранить номер текущей страницы.
-Expected result:
-- Номер сохранен.
-
-1. Нажать на кнопку "Previous".
+2. Нажимаем на кнопку "Next".
 Expected result:
 - Страница таблицы изменилась.
 
-1. Проверить изменения номера страницы.
+3. Сравнимаем номера.
 Expected result:
-- Номер изменен.
+- Номера не совпадают.
+
+4. Сохраняем номер текущей страницы.
+Expected result:
+- Страница с номером "2" сохранена.
+
+5. Нажимаем на кнопку "Previous".
+Expected result:
+- Страница таблицы изменилась.
+
+6. Сравниваем номера.
+Expected result:
+- Номера не совпадают.
 
 Post-condition:
-- Закрыть браузер.
+- Закрываем браузер.
 
 ---
 
-Test Case 13: Проверка функционала перехода по номеру страницы в таблице.
+Test Case 12: Проверка функционала перехода страницы по номеру в таблице.
 Preconditions:
 - Открыть браузер и перейти на 'https://demoqa.com/'.
 - Перейти в "Elements", затем нажать на "Web Tables" в меню навигации.
@@ -392,38 +391,47 @@ Preconditions:
 - Заготавливаем пользователей.
 
 Steps:
-1. Изменяем номер текущей страницы.
+1. Проверяем номер текущей страницы.
 Expected result:
-- Номер заполнен.
+- Страница с номером "1".
 
-1. Подтверждаем ввод.
+2. Изменяем номер текущей страницы "1", на номер "2" и подтверждаем ввод.
 Expected result:
-- Страница таблицы изменилась.
+- Номер введен.
 
-1. Проверить изменения номера страницы.
+3. Проверяем корректное отображение поля.
 Expected result:
-- Номер изменен.
+- Отображается корректно.
+
+4. Проверяем изменения номера страницы.
+Expected result:
+- Номер изменен на "2".
 
 Post-condition:
-- Закрыть браузер.
+- Закрываем браузер.
 
 ---
 
-Test Case 14: Проверка функционала выбора количества строк в таблице.
+Test Case 13: Проверка функционала выбора количества строк в таблице.
 Preconditions:
 - Открыть браузер и перейти на 'https://demoqa.com/'.
 - Перейти в "Elements", затем нажать на "Web Tables" в меню навигации.
+- Выбираем количество строк в "5 rows".
 
 Steps:
-1. Выбрать количество строк "100 rows".
+1. Проверяем количество строк в таблице.
+Expected result:
+- В таблице 5 строк.
+
+2. Выбрираем количество строк в "10 rows".
 Expected result:
 - Количество выбрано.
 
-1. Проверка на отображение строк.
+3. Проверяем количество строк в таблице.
 Expected result:
-- Строки отображаются.
+- В таблице 10 строк.
 
 Post-condition:
-- Закрыть браузер.
+- Закрываем браузер.
 
 ---

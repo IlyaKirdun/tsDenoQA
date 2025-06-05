@@ -17,15 +17,6 @@ export default class WebTablesPage {
     this.searchInput = this.page.locator('//input[@id= "searchBox"]')
   }
 
-  testUserData: { [key: string]: string} = {
-    firstName: 'Cierra',
-    lastName: 'Vega',
-    age: '39',
-    email: 'cierra@example.com',
-    salary: '10000',
-    department: 'Insurance'
-  }
-
   async testPause(): Promise<void> {
     await this.page.pause()
   }

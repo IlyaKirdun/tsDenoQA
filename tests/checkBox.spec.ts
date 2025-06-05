@@ -4,7 +4,7 @@ import CheckBoxPage from '../page/checkBox.page'
 import NavigationBar from '../utils/components/navigationBar'
 import { removeAds } from '../utils/functions'
 
-test.describe('Check the functioning of the "Text Box" section', () => {
+test.describe('Check the functioning of the "Check Box" section', () => {
   let mainPage: MainPage
   let navigationBar: NavigationBar
   let checkBoxPage: CheckBoxPage

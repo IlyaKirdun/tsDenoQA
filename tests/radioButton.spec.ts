@@ -15,7 +15,7 @@ const testDataOutput = {
   impressiveButton: 'Impressive'
 }
 
-test.describe('Check the functioning of the "Text Box" section', () => {
+test.describe('Check the functioning of the "Radio Button" section', () => {
   let mainPage: MainPage
   let navigationBar: NavigationBar
   let radioButtonPage: RadioButtonPage

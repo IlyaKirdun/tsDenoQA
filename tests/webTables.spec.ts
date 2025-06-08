@@ -13,7 +13,7 @@ test.describe('Проверка функциональности на стран
 
   let pageBeforePagination: string = ''
 
-  const testDataForCreateUser: { [key: string]: string} = {
+  const testDataForCreateUser: { [key: string]: string } = {
     firstName: 'Ivan',
     lastName: 'Ivanov',
     email: 'Ivanovich@gmail.com',
@@ -22,7 +22,7 @@ test.describe('Проверка функциональности на стран
     department: 'QA'
   }
 
-  const testDataExistingUser: { [key: string]: string} = {
+  const testDataExistingUser: { [key: string]: string } = {
     firstName: 'Cierra',
     lastName: 'Vega',
     age: '39',

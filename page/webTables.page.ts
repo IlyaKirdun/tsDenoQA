@@ -7,6 +7,9 @@ export default class WebTablesPage {
   modalWindow: Locator
   submitButtonInModalWindow: Locator
   searchInput: Locator
+  noRowsInput: Locator
+  pageNumberInput: Locator
+  clickOnTable: Locator
 
   constructor(page: Page) {
     this.page = page
@@ -15,6 +18,9 @@ export default class WebTablesPage {
     this.closeModalWindowButton = this.page.locator('//div[@role= "dialog"]//button[@class= "close"]')
     this.submitButtonInModalWindow = this.page.locator('//div[@class= "modal-body"]//button[@id= "submit"]')
     this.searchInput = this.page.locator('//input[@id= "searchBox"]')
+    this.noRowsInput = this.page.locator('//div[@class="rt-noData"]')
+    this.pageNumberInput = this.page.locator('//div[@class="pagination-bottom"]//div[@class="-pageJump"]/input')
+    this.clickOnTable = this.page.locator('//div[@class="rt-tr-group"][5]//div[@class="rt-td"][3]')
   }
 
   async testPause(): Promise<void> {
@@ -85,5 +91,57 @@ export default class WebTablesPage {
     }
 
     return cellContent
+  }
+
+  async editUser(): Promise<void> {
+    await this.page.locator(`//div[@class="rt-tr-group"][1]//div[@class="rt-td"][7]//span[@title= "Edit"]`).click()
+  }
+
+  async deleteUser(): Promise<void> {
+    await this.page.locator(`//div[@class="rt-tr-group"][1]//div[@class="rt-td"][7]//span[@title= "Delete"]`).click()
+  }
+
+  async isTableEmpty(): Promise<void> {
+    await expect(this.noRowsInput).toBeVisible()
+  }
+
+  async selectRowsOnPage(manyRows: string): Promise<void> {
+    await this.page.locator('//div[@class="pagination-bottom"]' +
+      '//select[@aria-label="rows per page"]').selectOption(`${manyRows}`)
+  }
+
+  async getPageNumber(): Promise<string> {
+    let pageNumber: string | null = await this.pageNumberInput.getAttribute('value')
+
+    if (pageNumber === null) {
+      process.exit(1)
+    }
+
+    return pageNumber
+  }
+
+  async clickPaginate(nextOrPrevious: string): Promise<void> {
+    await this.page.locator(`//div[@class="pagination-bottom"]
+    //button[text()="${nextOrPrevious}"]`).click()
+  }
+
+  async isPageMatch(beforePage: string): Promise<void> {
+    let currentPage: string | null = await this.pageNumberInput.getAttribute('Value')
+    expect(beforePage).toBe(currentPage)
+  }
+
+  async isPageNotMatch(beforePage: string): Promise<void> {
+    let currentPage: string | null = await this.pageNumberInput.getAttribute('Value')
+    expect(beforePage).not.toBe(currentPage)
+  }
+
+  async fillPageNumbers(pageNumber: string): Promise<void> {
+    await this.pageNumberInput.fill(pageNumber)
+    await this.clickOnTable.click()
+  }
+
+  async checkAmountRows(row: number): Promise<void> {
+    const getCurrentAmountRows = await this.page.$$(`//div[@class="rt-tbody"]//div[@class="rt-tr-group"]`)
+    expect(getCurrentAmountRows).toHaveLength(row)
   }
 }

@@ -344,10 +344,11 @@ Post-condition:
 
 ---
 
-Test Case 8: Проверка функционала редактирования пользователя "Cierra Vega".
+Test Case 8: Проверка функционала редактирования пользователя.
 Preconditions:
 - Открыть браузер и перейти на 'https://demoqa.com/'.
 - Перейти в "Elements", затем нажать на "Web Tables" в меню навигации.
+-
 
 Steps:
 1. Нажимаем на кнопку "Edit" у пользователя "Cierra Vega".
@@ -366,17 +367,57 @@ Expected result:
 Expected result:
 - Поле отображает firstName корректно.
 
-5. Нажимаем кнопку "Submit".
+5. Изменяем в поле "Last Name" значение "Vega" на lastName из $testDataForCreateUser.
+Expected result:
+- Поле заполнено нашим lastName.
+
+6. Проверяем поле "Last Name" на корректное отобрашение.
+Expected result:
+- Поле отображает lastName корректно.
+
+7. Изменяем в поле "Email" значение "cierra@example.com" на email из $testDataForCreateUser.
+Expected result:
+- Поле заполнено нашим email.
+
+8. Проверяем поле "Email" на корректное отобрашение.
+Expected result:
+- Поле отображает email корректно.
+
+9. Изменяем в поле "Age" значение "39" на age из $testDataForCreateUser.
+Expected result:
+- Поле заполнено нашим age.
+
+10. Проверяем поле "Age" на корректное отобрашение.
+Expected result:
+- Поле отображает age корректно.
+
+11. Изменяем в поле "Salary" значение "10000" на salary из $testDataForCreateUser.
+Expected result:
+- Поле заполнено нашим salary.
+
+12. Проверяем поле "Salary" на корректное отобрашение.
+Expected result:
+- Поле отображает salary корректно.
+
+13. Изменяем в поле "Department" значение "Insurance" на department из $testDataForCreateUser.
+Expected result:
+- Поле заполнено нашим deparment.
+
+14. Проверяем поле "Department" на корректное отобрашение.
+Expected result:
+- Поле отображает department корректно.
+
+15. Нажимаем кнопку "Submit".
 Expected result:
 - Кнопка нажата.
 
-6. Проверяем что модальное окно закрылось.
+16. Проверяем что модальное окно закрылось.
 Expected result:
 - Модальное окно закрыто.
 
-7. Проверяем отображение измененых данных.
+17. Проверяем изменение данных в таблице.
 Expected result:
-- Данные отображаются.
+- Данные изменены.
 
 Post-condition:
 - Закрываем браузер.
@@ -389,15 +430,11 @@ Preconditions:
 - Перейти в "Elements", затем нажать на "Web Tables" в меню навигации.
 
 Steps:
-1. Сохраняем ячейку "First Name" пользователя "Cierra Vega".
-Expected result:
-- "First Name" сохранено.
-
 1. Нажимаем на кнопку "Delete" у пользователя "Cierra Vega".
 Expected result:
 - Пользователель удален.
 
-2. Проверяем что пользователя с ячейкой "First Name" - "Cierra" нет в таблице.
+2. Ищем пользователя "Cierra Vega" через поиск.
 Expected result:
 - Пользователя нет.
 
@@ -467,19 +504,15 @@ Preconditions:
 - Заготавливаем пользователей.
 
 Steps:
-1. Проверяем номер текущей страницы.
+1. Сохраняем номер текущей страницы.
 Expected result:
-- Страница с номером "1".
+- Страница с номером "1" сохранена.
 
 2. Изменяем номер текущей страницы "1", на номер "2" и подтверждаем ввод.
 Expected result:
 - Номер введен.
 
-3. Проверяем корректное отображение поля.
-Expected result:
-- Отображается корректно.
-
-4. Проверяем изменения номера страницы.
+3. Проверяем изменения номера страницы.
 Expected result:
 - Номер изменен на "2".
 

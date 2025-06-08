@@ -11,6 +11,8 @@ test.describe('Проверка функциональности на стран
   let webTablesPage: WebTablesPage
   let registrationModalWindow: RegistrationModalWindow
 
+  let pageBeforePagination: string = ''
+
   const testDataForCreateUser: { [key: string]: string} = {
     firstName: 'Ivan',
     lastName: 'Ivanov',
@@ -370,6 +372,216 @@ test.describe('Проверка функциональности на стран
     await test.step('Сравниваем текущего пользователя в первой строке, с сохраненным.', async () => {
       let currentUserAfterSorting = await webTablesPage.getFirstUserData('department')
       await webTablesPage.isUserNotDataMatch(firstUserBeforeSorting['department'], currentUserAfterSorting)
+    })
+  })
+
+  test('CASE_8: Проверка функционала редактирования пользователя', async () => {
+    await test.step('Нажимаем на кнопку "Edit" у пользователя "Cierra Vega".', async () => {
+      await webTablesPage.editUser()
+    })
+
+    await test.step('Проверяем что модальное окно отображается.', async () => {
+      await registrationModalWindow.isModalWindowToBeVisible()
+    })
+
+    await test.step(`Изменяем в поле "First Name" значение "Cierra" на firstName из ${testDataForCreateUser}.`, async () => {
+      await registrationModalWindow.fillInputInModalWindow('First Name', testDataForCreateUser['firstName'])
+    })
+
+    await test.step('Проверяем поле "First Name" на корректное отображение.', async () => {
+      await registrationModalWindow.isInputDataCorrectInModalWindow('First Name', testDataForCreateUser['firstName'])
+    })
+
+    await test.step(`Изменяем в поле "Last Name" значение "Vega" на lastName из ${testDataForCreateUser}.`, async () => {
+      await registrationModalWindow.fillInputInModalWindow('Last Name', testDataForCreateUser['lastName'])
+    })
+
+    await test.step('Проверяем поле "Last Name" на корректное отображение.', async () => {
+      await registrationModalWindow.isInputDataCorrectInModalWindow('Last Name', testDataForCreateUser['lastName'])
+    })
+
+    await test.step(`Изменяем в поле "Email" значение "cierra@example.com" на email из ${testDataForCreateUser}.`, async () => {
+      await registrationModalWindow.fillInputInModalWindow('name@example.com', testDataForCreateUser['email'])
+    })
+
+    await test.step('Проверяем поле "Email" на корректное отображение.', async () => {
+      await registrationModalWindow.isInputDataCorrectInModalWindow('name@example.com', testDataForCreateUser['email'])
+    })
+
+    await test.step(`Изменяем в поле "Age" значение "39" на age из ${testDataForCreateUser}.`, async () => {
+      await registrationModalWindow.fillInputInModalWindow('Age', testDataForCreateUser['age'])
+    })
+
+    await test.step('Проверяем поле "Age" на корректное отображение.', async () => {
+      await registrationModalWindow.isInputDataCorrectInModalWindow('Age', testDataForCreateUser['age'])
+    })
+
+    await test.step(`Изменяем в поле "Salary" значение "10000" на salary из ${testDataForCreateUser}.`, async () => {
+      await registrationModalWindow.fillInputInModalWindow('Salary', testDataForCreateUser['salary'])
+    })
+
+    await test.step('Проверяем поле "Salary" на корректное отображение.', async () => {
+      await registrationModalWindow.isInputDataCorrectInModalWindow('Salary', testDataForCreateUser['salary'])
+    })
+
+    await test.step(`Изменяем в поле "Department" значение "Insurance" на department из ${testDataForCreateUser}.`, async () => {
+      await registrationModalWindow.fillInputInModalWindow('Department', testDataForCreateUser['department'])
+    })
+
+    await test.step('Проверяем поле "Department" на корректное отображение.', async () => {
+      await registrationModalWindow.isInputDataCorrectInModalWindow('Department', testDataForCreateUser['department'])
+    })
+
+    await test.step('Нажимаем кнопку "Submit".', async () => {
+      await registrationModalWindow.clickSubmitButtonInModalWindow()
+    })
+
+    await test.step('Проверяем что модальное окно закрылось.', async () => {
+      await registrationModalWindow.isModalWindowToBeHidden()
+    })
+
+    await test.step(`Получаем данные ячейки "First Name" и сверяем с ${testDataForCreateUser['firstName']}.`, async () => {
+      let currentFirstNameUser = await webTablesPage.getUserData(testDataForCreateUser['email'], 'firstName')
+      await webTablesPage.isUserDataMatch(testDataForCreateUser['firstName'], currentFirstNameUser)
+    })
+
+    await test.step(`Получаем данные ячейки "Last Name" и сверяем с ${testDataForCreateUser['lastName']}.`, async () => {
+      let currentLastNameUser = await webTablesPage.getUserData(testDataForCreateUser['email'], 'lastName')
+      await webTablesPage.isUserDataMatch(testDataForCreateUser['lastName'], currentLastNameUser)
+    })
+
+    await test.step(`Получаем данные ячейки "Age" и сверяем с ${testDataForCreateUser['age']}.`, async () => {
+      let currentAgeUser = await webTablesPage.getUserData(testDataForCreateUser['email'], 'age')
+      await webTablesPage.isUserDataMatch(testDataForCreateUser['age'], currentAgeUser)
+    })
+
+    await test.step(`Получаем данные ячейки "Email" и сверяем с ${testDataForCreateUser['email']}.`, async () => {
+      let currentEmailUser = await webTablesPage.getUserData(testDataForCreateUser['email'], 'email')
+      await webTablesPage.isUserDataMatch(testDataForCreateUser['email'], currentEmailUser)
+    })
+
+    await test.step(`Получаем данные ячейки "Salary" и сверяем с ${testDataForCreateUser['salary']}.`, async () => {
+      let currentSalaryUser = await webTablesPage.getUserData(testDataForCreateUser['email'], 'salary')
+      await webTablesPage.isUserDataMatch(testDataForCreateUser['salary'], currentSalaryUser)
+    })
+
+    await test.step(`Получаем данные ячейки "Department" и сверяем с ${testDataForCreateUser['department']}.`, async () => {
+      let currentDepartmentUser = await webTablesPage.getUserData(testDataForCreateUser['email'], 'department')
+      await webTablesPage.isUserDataMatch(testDataForCreateUser['department'], currentDepartmentUser)
+    })
+  })
+
+  test('CASE_9: Проверка функционала удаления пользователя в таблице.', async () => {
+    await test.step('Нажимаем на кнопку "Delete" у пользователя "Cierra Vega".', async () => {
+      await webTablesPage.deleteUser()
+    })
+
+    await test.step('Ищем пользователя "Cierra Vega" через поиск.', async () => {
+      await webTablesPage.fillSearchInput('Cierra')
+    })
+
+    await test.step('Проверяем результат поиска.', async () => {
+      await webTablesPage.isTableEmpty()
+    })
+  })
+
+  test('CASE_10: Проверка отображения сообщения при удалении всех пользователей в таблице.', async () => {
+    await test.step('Precondition.', async () => {
+      await test.step('Удаляем пользователя', async () => {
+        await webTablesPage.deleteUser()
+      })
+
+      await test.step('Удаляем пользователя', async () => {
+        await webTablesPage.deleteUser()
+      })
+
+      await test.step('Удаляем пользователя', async () => {
+        await webTablesPage.deleteUser()
+      })
+    })
+
+    await test.step('Проверяем отображение сообщения.', async () => {
+      await webTablesPage.isTableEmpty()
+    })
+  })
+
+  test('CASE_11: Проверка функционала пагинации в таблице.', async () => {
+    await test.step('Precondition.', async () => {
+      await test.step('Выбрать отображение в "5 rows"', async () => {
+        await webTablesPage.selectRowsOnPage('5')
+      })
+
+      await test.step('Заготавливаем пользователей.', async () => {
+        await registrationModalWindow.usersGeneration()
+      })
+    })
+
+    await test.step('Сохраняем номер текущей страницы.', async () => {
+      pageBeforePagination = await webTablesPage.getPageNumber()
+    })
+
+    await test.step('Нажимаем на кнопку "Next".', async () => {
+      await webTablesPage.clickPaginate('Next')
+    })
+
+    await test.step('Сравниваем номера.', async () => {
+      await webTablesPage.isPageNotMatch(pageBeforePagination)
+    })
+
+    await test.step('Сохраняем номер текущей страницы.', async () => {
+      pageBeforePagination = await webTablesPage.getPageNumber()
+    })
+
+    await test.step('Нажимаем на кнопку "Previous".', async () => {
+      await webTablesPage.clickPaginate('Previous')
+    })
+
+    await test.step('Сравниваем номера.', async () => {
+      await webTablesPage.isPageNotMatch(pageBeforePagination)
+    })
+  })
+
+  test('CASE_12: Проверка функционала перехода страницы по номеру в таблице.', async () => {
+    await test.step('Precondition.', async () => {
+      await test.step('Выбрать отображение в "5 rows"', async () => {
+        await webTablesPage.selectRowsOnPage('5')
+      })
+
+      await test.step('Заготавливаем пользователей.', async () => {
+        await registrationModalWindow.usersGeneration()
+      })
+    })
+
+    await test.step('Сохраняем номер текущей страницы.', async () => {
+      pageBeforePagination = await webTablesPage.getPageNumber()
+    })
+
+    await test.step('Изменяем номер текущей страницы "1", на номер "2" и подтверждаем ввод.', async () => {
+      await webTablesPage.fillPageNumbers('2')
+    })
+
+    await test.step('Проверяем изменения страницы на номер "2".', async () => {
+      await webTablesPage.isPageMatch('2')
+    })
+  })
+
+  test('CASE_13: Проверка функционала выбора количества строк в таблице.', async () => {
+    await test.step('Precondition.', async () => {
+      await test.step('Выбрать отображение в "5 rows"', async () => {
+        await webTablesPage.selectRowsOnPage('5')
+      })
+    })
+
+    await test.step('Проверяем количество строк в таблице.', async () => {
+      await webTablesPage.checkAmountRows(5)
+    })
+
+    await test.step('Выбираем количество строк в "10 rows".', async () => {
+      await webTablesPage.selectRowsOnPage('10')
+    })
+
+    await test.step('Проверяем количество строк в таблице.', async () => {
+      await webTablesPage.checkAmountRows(10)
     })
   })
 })

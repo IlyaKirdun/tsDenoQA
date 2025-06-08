@@ -49,4 +49,17 @@ export default class RegistrationModalWindow {
   async clickSubmitButtonInModalWindow(): Promise<void> {
     await this.submitButtonInModalWindow.click()
   }
+
+  async usersGeneration(): Promise<void> {
+    for (let i: number = 0; i < 10; i++) {
+      await this.page.locator('//div[@class= "web-tables-wrapper"]//button[@id= "addNewRecordButton"]').click()
+      await this.page.locator(`//div[@class= "modal-body"]//input[@placeholder= "First Name"]`).fill('Ivan')
+      await this.page.locator(`//div[@class= "modal-body"]//input[@placeholder= "Last Name"]`).fill('Ivanov')
+      await this.page.locator(`//div[@class= "modal-body"]//input[@placeholder= "name@example.com"]`).fill('ivan@example.com')
+      await this.page.locator(`//div[@class= "modal-body"]//input[@placeholder= "Age"]`).fill('25')
+      await this.page.locator(`//div[@class= "modal-body"]//input[@placeholder= "Salary"]`).fill('15000')
+      await this.page.locator(`//div[@class= "modal-body"]//input[@placeholder= "Department"]`).fill('QA')
+      await this.clickSubmitButtonInModalWindow()
+    }
+  }
 }

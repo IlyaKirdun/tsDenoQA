@@ -1,10 +1,9 @@
 {
-  "name": "tsDemoQA",
-  "version": "1.0.0",
+  "name": "demoqa",
+  "version": "1.0.1",
   "description": "",
-  "main": "dist/index.js",
   "scripts": {
-    "build": "tsc"
+
   },
   "devDependencies": {
     "@playwright/test": "^1.52.0",

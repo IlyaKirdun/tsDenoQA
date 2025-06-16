@@ -140,12 +140,12 @@ export default class WebTablesPage {
 
   async addUser(index: number = 1): Promise<string> {
     await this.addUserButton.click()
-    await this.registrationModalWindow.fillInputInModalWindow('firstName', `${defaultUserObject.firstName}${index}`)
-    await this.registrationModalWindow.fillInputInModalWindow('lastName', `${defaultUserObject.lastName}${index}`)
-    await this.registrationModalWindow.fillInputInModalWindow('userEmail', `${index}${defaultUserObject.userEmail}`)
-    await this.registrationModalWindow.fillInputInModalWindow('age', `${defaultUserObject.age}${index}`)
-    await this.registrationModalWindow.fillInputInModalWindow('salary', `${index}${defaultUserObject.salary}`)
-    await this.registrationModalWindow.fillInputInModalWindow('department', `${this.departmentList[index - 1]}`)
+    await this.registrationModalWindow.fillInputDataByInputName('firstName', `${defaultUserObject.firstName}${index}`)
+    await this.registrationModalWindow.fillInputDataByInputName('lastName', `${defaultUserObject.lastName}${index}`)
+    await this.registrationModalWindow.fillInputDataByInputName('userEmail', `${index}${defaultUserObject.userEmail}`)
+    await this.registrationModalWindow.fillInputDataByInputName('age', `${defaultUserObject.age}${index}`)
+    await this.registrationModalWindow.fillInputDataByInputName('salary', `${index}${defaultUserObject.salary}`)
+    await this.registrationModalWindow.fillInputDataByInputName('department', `${this.departmentList[index - 1]}`)
     await this.registrationModalWindow.clickSubmitButtonInModalWindow()
 
     return `${index}${defaultUserObject.userEmail}`
@@ -160,9 +160,9 @@ export default class WebTablesPage {
     return usersEmailArray
   }
 
-  async deleteAddedUsers(userCount: number, usersEmail: string[]): Promise<void> {
-    for (let index: number = 0; index < userCount; index++) {
-      await this.clickDeleteUserButton(usersEmail[index])
+  async deleteAddedUsers(usersEmail: string[]): Promise<void> {
+    for (const email of usersEmail) {
+      await this.clickDeleteUserButtonByUserEmail(email)
     }
   }
 }

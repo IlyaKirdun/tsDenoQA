@@ -47,10 +47,10 @@ test.describe('Check the functioning of the "Check Box" section', () => {
     checkBoxPage = new CheckBoxPage(page)
     navigationBar = new NavigationBar(page)
 
-    await mainPage.gotoMainPage()
+    await mainPage.navigateToMainPage()
     await removeAds(page)
-    await mainPage.gotoCard('Elements')
-    await navigationBar.gotoNavBar('Elements', 'Check Box')
+    await mainPage.navigateToCard('Elements')
+    await navigationBar.clickElementInNavigationBar('Check Box')
     await removeAds(page)
   })
 

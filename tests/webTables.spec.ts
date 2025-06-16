@@ -529,8 +529,14 @@ test.describe('Проверка функциональности на стран
       await assertByState(actualPageNumber, pageBeforePagination, 'notMatch')
     })
 
-    await test.step('Сохраняем номер текущей страницы.', async () => {
+    await test.step('Проверяем что на страницы изменились пользователи.', async () => {
+      const actualUser = await webTablesPage.getFirstUserData('userEmail')
+      await assertByState(actualUser, userBeforePagination, 'notMatch')
+    })
+
+    await test.step('Сохраняем номер текущей страницы и пользователя из первой строки.', async () => {
       pageBeforePagination = await webTablesPage.pageNumberInput.inputValue()
+      userBeforePagination = await webTablesPage.getFirstUserData('userEmail')
     })
 
     await test.step('Нажимаем на кнопку "Previous".', async () => {
@@ -540,6 +546,17 @@ test.describe('Проверка функциональности на стран
     await test.step('Сравниваем номера.', async () => {
       const actualPageNumber: string = await webTablesPage.pageNumberInput.inputValue()
       await assertByState(actualPageNumber, pageBeforePagination, 'notMatch')
+    })
+
+    await test.step('Проверяем что на страницы изменились пользователи.', async () => {
+      const actualUser = await webTablesPage.getFirstUserData('userEmail')
+      await assertByState(actualUser, userBeforePagination, 'notMatch')
+    })
+
+    await test.step('Post-condition', async () => {
+      await test.step('Удаляем созданных пользователей', async () => {
+        await webTablesPage.deleteAddedUsers(10, usersEmail)
+      })
     })
   })
 

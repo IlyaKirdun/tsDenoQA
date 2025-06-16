@@ -21,10 +21,10 @@ test.describe('Check the functioning of the "Text Box" section', () => {
     textBoxPage = new TextBoxPage(page)
     navigationBar = new NavigationBar(page)
 
-    await mainPage.gotoMainPage()
+    await mainPage.navigateToMainPage()
     await removeAds(page)
-    await mainPage.gotoCard('Elements')
-    await navigationBar.gotoNavBar('Elements', 'Text Box')
+    await mainPage.navigateToCard('Elements')
+    await navigationBar.clickElementInNavigationBar('Text Box')
     await removeAds(page)
   })
 

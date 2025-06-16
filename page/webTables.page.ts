@@ -1,15 +1,36 @@
 import {expect, Locator, Page} from "@playwright/test"
+import {defaultUserObject, SelectingAmountRows, SortingCell} from "../utils/types"
+import RegistrationModalWindow from "../utils/components/registrationModalWindow";
 
 export default class WebTablesPage {
   page: Page
+
+  registrationModalWindow: RegistrationModalWindow
+
   addUserButton: Locator
   searchInput: Locator
   noRowsInput: Locator
   pageNumberInput: Locator
   clickOnTable: Locator
 
+  departmentList: string[] = [
+      'QA',
+      'Legal',
+      'Insurance',
+      'Compliance',
+      'HR',
+      'Product Manager',
+      'AQA',
+      'Manual',
+      'Support',
+      'Test',
+  ]
+
   constructor(page: Page) {
     this.page = page
+
+    this.registrationModalWindow = new RegistrationModalWindow(this.page)
+
     this.addUserButton = this.page.locator('//div[@class= "web-tables-wrapper"]//button[@id= "addNewRecordButton"]')
     this.searchInput = this.page.locator('//input[@id= "searchBox"]')
     this.noRowsInput = this.page.locator('//div[@class="rt-noData"]')
@@ -17,16 +38,12 @@ export default class WebTablesPage {
     this.clickOnTable = this.page.locator('//div[@class="rt-tr-group"][5]//div[@class="rt-td"][3]')
   }
 
-  async testPause(): Promise<void> {
-    await this.page.pause()
-  }
-
   async clickAddUserButton(): Promise<void> {
     await this.addUserButton.click()
   }
 
-  async getUserData(userEmail: string, cellNames: string): Promise<string> {
-   const keyWordFromUserLocator: { [key: string]: number} = {
+  async getUserData(userEmail: string, cellNames: SortingCell): Promise<string> {
+   const keyWordFromUserLocator: { [key : string] : number } = {
       firstName: 1,
       lastName: 2,
       age: 3,
@@ -43,19 +60,20 @@ export default class WebTablesPage {
     return cellContent
   }
 
-  public async fillSearchInput(userEmail: string): Promise<void> {
-    await this.fill(this.searchInput, userEmail)
+  public async fillSearchInput(userData: string): Promise<void> {
+    await this.fill(this.searchInput, userData)
   }
 
   public async fillPageNumberInput(pageNumber: number): Promise<void> {
     await this.fill(this.searchInput, `${pageNumber}`)
+    await this.page.keyboard.press('Enter')
   }
 
   private async fill(nameInput: Locator, fillData: string): Promise<void> {
     await nameInput.fill(fillData)
   }
 
-  async clickOnSortingCell(cellName: string): Promise<void> {
+  async clickOnSortingCell(cellName: SortingCell): Promise<void> {
     const keyWordFromCellLocator: { [key: string]: number} = {
       firstName: 1,
       lastName: 2,
@@ -68,7 +86,7 @@ export default class WebTablesPage {
     //div[@class="rt-th rt-resizable-header -cursor-pointer"][${keyWordFromCellLocator[cellName]}]`).click()
   }
 
-  async getFirstUserData(cellName: string): Promise<string> {
+  async getFirstUserData(cellName: SortingCell): Promise<string> {
     const keyWordFromCellUserData: { [key: string]: number} = {
       firstName: 1,
       lastName: 2,
@@ -87,19 +105,25 @@ export default class WebTablesPage {
     return cellContent
   }
 
-  async editUser(): Promise<void> {
-    await this.page.locator(`//div[@class="rt-tr-group"][1]//div[@class="rt-td"][7]//span[@title= "Edit"]`).click()
+  async clickEditUserButton(userEmail: string): Promise<void> {
+    await this.page.locator(`//div[@class="rt-tr-group"]//div[text()="${userEmail}"]/parent::div//span[@title="Edit"]`).click()
   }
 
-  async deleteUser(): Promise<void> {
-    await this.page.locator(`//div[@class="rt-tr-group"][1]//div[@class="rt-td"][7]//span[@title= "Delete"]`).click()
+  async clickDeleteUserButton(userEmail: string): Promise<void> {
+    await this.page.locator(`//div[@class="rt-tr-group"]//div[text()="${userEmail}"]/parent::div//span[@title="Delete"]`).click()
   }
 
-  async isTableEmpty(): Promise<void> {
+  async verifyIndicatorTableEmpty(): Promise<void> {
     await expect(this.noRowsInput).toBeVisible()
   }
 
-  async selectRowsOnPage(manyRows: string): Promise<void> {
+  async checkVisibilityUserByEmail(userEmail: string, state: 'toBeVisible'|'toBeHidden'): Promise<void> {
+    const element = this.page.locator(`//div[text()="${userEmail}"]`)
+
+    await expect(element)[state]()
+  }
+
+  async selectRowsOnPage(manyRows: number): Promise<void> {
     await this.page.locator('//div[@class="pagination-bottom"]' +
       '//select[@aria-label="rows per page"]').selectOption(`${manyRows}`)
   }
@@ -109,8 +133,36 @@ export default class WebTablesPage {
     //button[text()="${nextOrPrevious}"]`).click()
   }
 
-  async checkAmountRows(row: number): Promise<void> {
+  async checkAmountRows(row: SelectingAmountRows): Promise<void> {
     const getCurrentAmountRows = this.page.locator(`//div[@class="rt-tbody"]//div[@class="rt-tr-group"]`)
     expect(await getCurrentAmountRows.count()).toStrictEqual(row)
+  }
+
+  async addUser(index: number = 1): Promise<string> {
+    await this.addUserButton.click()
+    await this.registrationModalWindow.fillInputInModalWindow('firstName', `${defaultUserObject.firstName}${index}`)
+    await this.registrationModalWindow.fillInputInModalWindow('lastName', `${defaultUserObject.lastName}${index}`)
+    await this.registrationModalWindow.fillInputInModalWindow('userEmail', `${index}${defaultUserObject.userEmail}`)
+    await this.registrationModalWindow.fillInputInModalWindow('age', `${defaultUserObject.age}${index}`)
+    await this.registrationModalWindow.fillInputInModalWindow('salary', `${index}${defaultUserObject.salary}`)
+    await this.registrationModalWindow.fillInputInModalWindow('department', `${this.departmentList[index - 1]}`)
+    await this.registrationModalWindow.clickSubmitButtonInModalWindow()
+
+    return `${index}${defaultUserObject.userEmail}`
+  }
+
+  async addUsersGenerator(userCount: number): Promise<string[]> {
+    const usersEmailArray: string[] = []
+    for (let index: number = 1; index <= userCount; index++) {
+      usersEmailArray.push(await this.addUser(index))
+    }
+
+    return usersEmailArray
+  }
+
+  async deleteAddedUsers(userCount: number, usersEmail: string[]): Promise<void> {
+    for (let index: number = 0; index < userCount; index++) {
+      await this.clickDeleteUserButton(usersEmail[index])
+    }
   }
 }

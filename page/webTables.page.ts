@@ -11,7 +11,6 @@ export default class WebTablesPage {
   searchInput: Locator
   noRowsInput: Locator
   pageNumberInput: Locator
-  clickOnTable: Locator
 
   departmentList: string[] = [
       'QA',
@@ -35,7 +34,6 @@ export default class WebTablesPage {
     this.searchInput = this.page.locator('//input[@id= "searchBox"]')
     this.noRowsInput = this.page.locator('//div[@class="rt-noData"]')
     this.pageNumberInput = this.page.locator('//div[@class="pagination-bottom"]//div[@class="-pageJump"]/input')
-    this.clickOnTable = this.page.locator('//div[@class="rt-tr-group"][5]//div[@class="rt-td"][3]')
   }
 
   async clickAddUserButton(): Promise<void> {
@@ -105,7 +103,7 @@ export default class WebTablesPage {
     return cellContent
   }
 
-  async clickEditUserButton(userEmail: string): Promise<void> {
+  async clickEditUserButtonByUserEmail(userEmail: string): Promise<void> {
     await this.page.locator(`//div[@class="rt-tr-group"]//div[text()="${userEmail}"]/parent::div//span[@title="Edit"]`).click()
   }
 

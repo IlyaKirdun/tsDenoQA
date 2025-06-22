@@ -63,7 +63,7 @@ test.describe('Check the functioning of the "Text Box" section', () => {
     })
 
     await test.step(`Match the "Permanent Address" output field and ${testData.permanentAddress}`, async () => {
-      await textBoxPage.isDataMatch(`Permanent Address :${testData.permanentAddress}`, textBoxPage.permanentAddressOutput)
+      await textBoxPage.isDataMatch(`Permananet Address :${testData.permanentAddress}`, textBoxPage.permanentAddressOutput)
     })
   })
 })

@@ -399,7 +399,7 @@ test.describe('Проверка функциональности на стран
     })
 
     await test.step(`Нажимаем на кнопку "Edit" у пользователя с email ${userEmail}.`, async () => {
-      await webTablesPage.clickEditUserButton(userEmail)
+      await webTablesPage.clickEditUserButtonByUserEmail(userEmail)
     })
 
     await test.step('Проверяем что модальное окно отображается.', async () => {
@@ -531,14 +531,16 @@ test.describe('Проверка функциональности на стран
 
   test('CASE_11: Проверка функционала пагинации в таблице.', async () => {
     let userEmails: string[]
+    const rows = 5
+    const userCount = 10
 
     await test.step('Pre-condition.', async () => {
       await test.step('Выбрать отображение в "5 rows"', async () => {
-        await webTablesPage.rowsPerPage(5)
+        await webTablesPage.rowsPerPage(rows)
       })
 
       await test.step('Заготавливаем пользователей.', async () => {
-        userEmails = await webTablesPage.usersGenerator(10)
+        userEmails = await webTablesPage.usersGenerator(userCount)
       })
     })
 

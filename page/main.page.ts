@@ -12,7 +12,7 @@ export default class MainPage {
     await this.page.goto('/', { waitUntil: 'domcontentloaded' })
   }
 
-  async navigateToCard(elementName: ElementsOnMainPage): Promise<void> {
+  async clickOnElement(elementName: ElementsOnMainPage): Promise<void> {
     await this.page.locator(`//h5[text()="${elementName}"]`).click()
   }
 }

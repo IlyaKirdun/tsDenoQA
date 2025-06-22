@@ -23,7 +23,7 @@ test.describe('Check the functioning of the "Text Box" section', () => {
 
     await mainPage.navigateToMainPage()
     await removeAds(page)
-    await mainPage.navigateToCard('Elements')
+    await mainPage.clickOnElement('Elements')
     await navigationBar.clickElementInNavigationBar('Text Box')
     await removeAds(page)
   })

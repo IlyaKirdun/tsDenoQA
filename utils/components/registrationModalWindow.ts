@@ -1,5 +1,5 @@
 import {expect, Locator, Page} from "@playwright/test"
-import {SortingCell} from "../types";
+import {SortingCell, VisibilityState} from "../types";
 
 export default class RegistrationModalWindow {
   page: Page
@@ -34,7 +34,7 @@ export default class RegistrationModalWindow {
     //input[@id="${inputName}"]`).fill(testUserData)
   }
 
-  async verifyInputDataCorrectInModalWindow(inputName: SortingCell, testUserData: string): Promise<void> {
+  async verifyEnteredData(inputName: SortingCell, testUserData: string): Promise<void> {
     const currentData: string | null = await this.page.locator(`
     //div[@class="modal-body"]//input[@id="${inputName}"]`).inputValue()
     expect(testUserData).toBe(currentData)

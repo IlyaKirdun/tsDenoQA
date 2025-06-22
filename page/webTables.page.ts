@@ -1,5 +1,5 @@
 import {expect, Locator, Page} from "@playwright/test"
-import {defaultUserObject, SelectingAmountRows, SortingCell} from "../utils/types"
+import {defaultUserObject, SelectingAmountRows, SortingCell, VisibilityState} from "../utils/types"
 import RegistrationModalWindow from "../utils/components/registrationModalWindow";
 
 export default class WebTablesPage {
@@ -65,12 +65,12 @@ export default class WebTablesPage {
   }
 
   public async fillPageNumberInput(pageNumber: number): Promise<void> {
-    await this.fill(this.searchInput, `${pageNumber}`)
+    await this.fill(this.pageNumberInput, `${pageNumber}`)
     await this.page.keyboard.press('Enter')
   }
 
-  private async fill(nameInput: Locator, fillData: string): Promise<void> {
-    await nameInput.fill(fillData)
+  private async fill(nameLocator: Locator, fillData: string): Promise<void> {
+    await nameLocator.fill(fillData)
   }
 
   async clickOnSortingCell(cellName: SortingCell): Promise<void> {
@@ -109,23 +109,23 @@ export default class WebTablesPage {
     await this.page.locator(`//div[@class="rt-tr-group"]//div[text()="${userEmail}"]/parent::div//span[@title="Edit"]`).click()
   }
 
-  async clickDeleteUserButton(userEmail: string): Promise<void> {
+  async clickDeleteUserButtonByUserEmail(userEmail: string): Promise<void> {
     await this.page.locator(`//div[@class="rt-tr-group"]//div[text()="${userEmail}"]/parent::div//span[@title="Delete"]`).click()
   }
 
-  async verifyIndicatorTableEmpty(): Promise<void> {
-    await expect(this.noRowsInput).toBeVisible()
+  async verifyIndicatorTableEmpty(state: VisibilityState): Promise<void> {
+    await expect(this.noRowsInput)[state]()
   }
 
-  async checkVisibilityUserByEmail(userEmail: string, state: 'toBeVisible'|'toBeHidden'): Promise<void> {
+  async checkVisibilityUserByEmail(userEmail: string, state: VisibilityState): Promise<void> {
     const element = this.page.locator(`//div[text()="${userEmail}"]`)
 
     await expect(element)[state]()
   }
 
-  async selectRowsOnPage(manyRows: number): Promise<void> {
+  async rowsPerPage(rows: number): Promise<void> {
     await this.page.locator('//div[@class="pagination-bottom"]' +
-      '//select[@aria-label="rows per page"]').selectOption(`${manyRows}`)
+      '//select[@aria-label="rows per page"]').selectOption(`${rows}`)
   }
 
   async clickPaginate(nextOrPrevious: string): Promise<void> {
@@ -134,8 +134,8 @@ export default class WebTablesPage {
   }
 
   async checkAmountRows(row: SelectingAmountRows): Promise<void> {
-    const getCurrentAmountRows = this.page.locator(`//div[@class="rt-tbody"]//div[@class="rt-tr-group"]`)
-    expect(await getCurrentAmountRows.count()).toStrictEqual(row)
+    const rowAmount = this.page.locator(`//div[@class="rt-tbody"]//div[@class="rt-tr-group"]`)
+    expect(await rowAmount.count()).toStrictEqual(row)
   }
 
   async addUser(index: number = 1): Promise<string> {
@@ -151,7 +151,7 @@ export default class WebTablesPage {
     return `${index}${defaultUserObject.userEmail}`
   }
 
-  async addUsersGenerator(userCount: number): Promise<string[]> {
+  async usersGenerator(userCount: number): Promise<string[]> {
     const usersEmailArray: string[] = []
     for (let index: number = 1; index <= userCount; index++) {
       usersEmailArray.push(await this.addUser(index))

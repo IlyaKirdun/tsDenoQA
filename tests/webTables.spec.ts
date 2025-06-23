@@ -235,6 +235,8 @@ test.describe('Проверка функциональности на стран
   })
 
   test('CASE_5: Проверка функционала на создание пользователя.', async () => {
+    const userEmail: string[] = [testDataForCreateUser['userEmail']]
+
     await test.step('Нажимаем кнопку "Add".', async () => {
       await webTablesPage.clickAddUserButton()
     })
@@ -295,6 +297,12 @@ test.describe('Проверка функциональности на стран
     await test.step(`Получаем данные ячейки "Department" и сверяем с ${testDataForCreateUser['department']}.`, async () => {
       let currentDepartmentUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'department')
       await assertByState(testDataForCreateUser['department'], currentDepartmentUser, 'match')
+    })
+
+    await test.step('Post-condition', async () => {
+      await test.step('Удаляем пользователя', async () => {
+        await webTablesPage.deleteAddedUsers(userEmail)
+      })
     })
   })
 
@@ -399,58 +407,58 @@ test.describe('Проверка функциональности на стран
     })
 
     await test.step(`Нажимаем на кнопку "Edit" у пользователя с email ${userEmail}.`, async () => {
-      await webTablesPage.clickEditUserButtonByUserEmail(userEmail)
+      await webTablesPage.clickUsersActionButtonByUserEmail('Edit', userEmail)
     })
 
     await test.step('Проверяем что модальное окно отображается.', async () => {
       await registrationModalWindow.checkVisibilityByState('toBeVisible')
     })
 
-    await test.step(`Изменяем в поле "First Name" значение "Cierra" на firstName из ${testDataForCreateUser}.`, async () => {
+    await test.step(`Изменяем в поле "First Name" значение на firstName из ${testDataForCreateUser}.`, async () => {
       await registrationModalWindow.fillInputDataByInputName('firstName', testDataForCreateUser['firstName'])
     })
 
-    await test.step('Проверяем что поле "First Name" заполнено нашим значением.', async () => {
+    await test.step(`Проверяем что поле "First Name" заполнено значением ${testDataForCreateUser['firstName']}.`, async () => {
       await registrationModalWindow.verifyEnteredData('firstName', testDataForCreateUser['firstName'])
     })
 
-    await test.step(`Изменяем в поле "Last Name" значение "Vega" на lastName из ${testDataForCreateUser}.`, async () => {
+    await test.step(`Изменяем в поле "Last Name" значение на lastName из ${testDataForCreateUser}.`, async () => {
       await registrationModalWindow.fillInputDataByInputName('lastName', testDataForCreateUser['lastName'])
     })
 
-    await test.step('Проверяем что поле "Last Name" заполнено нашим значением.', async () => {
+    await test.step(`Проверяем что поле "Last Name" заполнено значением ${testDataForCreateUser['lastName']}.`, async () => {
       await registrationModalWindow.verifyEnteredData('lastName', testDataForCreateUser['lastName'])
     })
 
-    await test.step(`Изменяем в поле "Email" значение "cierra@example.com" на email из ${testDataForCreateUser}.`, async () => {
+    await test.step(`Изменяем в поле "Email" значение на email из ${testDataForCreateUser}.`, async () => {
       await registrationModalWindow.fillInputDataByInputName('userEmail', testDataForCreateUser['userEmail'])
     })
 
-    await test.step('Проверяем что поле "Email" заполнено нашим значением.', async () => {
+    await test.step(`Проверяем что поле "Email" заполнено значением ${testDataForCreateUser['userEmail']}.`, async () => {
       await registrationModalWindow.verifyEnteredData('userEmail', testDataForCreateUser['userEmail'])
     })
 
-    await test.step(`Изменяем в поле "Age" значение "39" на age из ${testDataForCreateUser}.`, async () => {
+    await test.step(`Изменяем в поле "Age" значение на age из ${testDataForCreateUser}.`, async () => {
       await registrationModalWindow.fillInputDataByInputName('age', testDataForCreateUser['age'])
     })
 
-    await test.step('Проверяем что поле "Age" заполнено нашим значением.', async () => {
+    await test.step(`Проверяем что поле "Age" заполнено значением ${testDataForCreateUser['age']}.`, async () => {
       await registrationModalWindow.verifyEnteredData('age', testDataForCreateUser['age'])
     })
 
-    await test.step(`Изменяем в поле "Salary" значение "10000" на salary из ${testDataForCreateUser}.`, async () => {
+    await test.step(`Изменяем в поле "Salary" значение на salary из ${testDataForCreateUser}.`, async () => {
       await registrationModalWindow.fillInputDataByInputName('salary', testDataForCreateUser['salary'])
     })
 
-    await test.step('Проверяем что поле "Salary" заполнено нашим значением.', async () => {
+    await test.step(`Проверяем что поле "Salary" заполнено значением ${testDataForCreateUser['salary']}.`, async () => {
       await registrationModalWindow.verifyEnteredData('salary', testDataForCreateUser['salary'])
     })
 
-    await test.step(`Изменяем в поле "Department" значение "Insurance" на department из ${testDataForCreateUser}.`, async () => {
+    await test.step(`Изменяем в поле "Department" значение на department из ${testDataForCreateUser}.`, async () => {
       await registrationModalWindow.fillInputDataByInputName('department', testDataForCreateUser['department'])
     })
 
-    await test.step('Проверяем что поле "Department" заполнено нашим значением.', async () => {
+    await test.step(`Проверяем что поле "Department" заполнено значением ${testDataForCreateUser['department']}.`, async () => {
       await registrationModalWindow.verifyEnteredData('department', testDataForCreateUser['department'])
     })
 
@@ -494,7 +502,7 @@ test.describe('Проверка функциональности на стран
 
     await test.step(`Post-condition`, async () => {
       await test.step('Удаляем пользователя', async () => {
-        await webTablesPage.clickDeleteUserButtonByUserEmail(testDataForCreateUser['userEmail'])
+        await webTablesPage.clickUsersActionButtonByUserEmail('Delete', testDataForCreateUser['userEmail'])
       })
     })
   })
@@ -509,7 +517,7 @@ test.describe('Проверка функциональности на стран
     })
 
     await test.step(`Нажимаем на кнопку "Delete" у созданного пользователя с email ${userEmail}`, async () => {
-      await webTablesPage.clickDeleteUserButtonByUserEmail(userEmail)
+      await webTablesPage.clickUsersActionButtonByUserEmail('Delete', userEmail)
     })
 
     await test.step('Проверяем что пользователь удалён.', async () => {
@@ -647,7 +655,7 @@ test.describe('Проверка функциональности на стран
     })
 
     await test.step('Проверяем количество строк в таблице.', async () => {
-      await webTablesPage.checkAmountRows(initialAmountRows)
+      await webTablesPage.checkRowsAmount(initialAmountRows)
     })
 
     await test.step(`Выбираем количество строк в ${nextAmountRows}.`, async () => {
@@ -655,7 +663,7 @@ test.describe('Проверка функциональности на стран
     })
 
     await test.step('Проверяем количество строк в таблице.', async () => {
-      await webTablesPage.checkAmountRows(nextAmountRows)
+      await webTablesPage.checkRowsAmount(nextAmountRows)
     })
   })
 })

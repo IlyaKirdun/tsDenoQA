@@ -67,8 +67,8 @@ export default class WebTablesPage {
     await this.page.keyboard.press('Enter')
   }
 
-  private async fill(nameLocator: Locator, fillData: string): Promise<void> {
-    await nameLocator.fill(fillData)
+  private async fill(locatorName: Locator, fillData: string): Promise<void> {
+    await locatorName.fill(fillData)
   }
 
   async clickOnSortingCell(cellName: SortingCell): Promise<void> {
@@ -103,12 +103,8 @@ export default class WebTablesPage {
     return cellContent
   }
 
-  async clickEditUserButtonByUserEmail(userEmail: string): Promise<void> {
-    await this.page.locator(`//div[@class="rt-tr-group"]//div[text()="${userEmail}"]/parent::div//span[@title="Edit"]`).click()
-  }
-
-  async clickDeleteUserButtonByUserEmail(userEmail: string): Promise<void> {
-    await this.page.locator(`//div[@class="rt-tr-group"]//div[text()="${userEmail}"]/parent::div//span[@title="Delete"]`).click()
+  async clickUsersActionButtonByUserEmail(action: 'Edit' | 'Delete', userEmail: string): Promise<void> {
+    await this.page.locator(`//div[@class="rt-tr-group"]//div[text()="${userEmail}"]/parent::div//span[@title="${action}"]`).click()
   }
 
   async verifyIndicatorTableEmpty(state: VisibilityState): Promise<void> {
@@ -131,7 +127,7 @@ export default class WebTablesPage {
     //button[text()="${nextOrPrevious}"]`).click()
   }
 
-  async checkAmountRows(row: SelectingAmountRows): Promise<void> {
+  async checkRowsAmount(row: SelectingAmountRows): Promise<void> {
     const rowAmount = this.page.locator(`//div[@class="rt-tbody"]//div[@class="rt-tr-group"]`)
     expect(await rowAmount.count()).toStrictEqual(row)
   }
@@ -160,7 +156,7 @@ export default class WebTablesPage {
 
   async deleteAddedUsers(usersEmail: string[]): Promise<void> {
     for (const email of usersEmail) {
-      await this.clickDeleteUserButtonByUserEmail(email)
+      await this.clickUsersActionButtonByUserEmail('Delete', email)
     }
   }
 }

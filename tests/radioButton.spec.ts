@@ -25,10 +25,10 @@ test.describe('Check the functioning of the "Radio Button" section', () => {
     radioButtonPage = new RadioButtonPage(page)
     navigationBar = new NavigationBar(page)
 
-    await mainPage.gotoMainPage()
+    await mainPage.navigateToMainPage()
     await removeAds(page)
-    await mainPage.gotoCard('Elements')
-    await navigationBar.gotoNavBar('Elements', 'Radio Button')
+    await mainPage.clickOnElement('Elements')
+    await navigationBar.clickElementInNavigationBar('Radio Button')
     await removeAds(page)
   })
 

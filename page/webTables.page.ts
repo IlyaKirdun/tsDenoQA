@@ -1,42 +1,51 @@
 import {expect, Locator, Page} from "@playwright/test"
+import {defaultUserObject, SelectingAmountRows, SortingCell, VisibilityState} from "../utils/types"
+import RegistrationModalWindow from "../utils/components/registrationModalWindow";
 
 export default class WebTablesPage {
   page: Page
+
+  registrationModalWindow: RegistrationModalWindow
+
   addUserButton: Locator
-  closeModalWindowButton: Locator
-  modalWindow: Locator
-  submitButtonInModalWindow: Locator
   searchInput: Locator
   noRowsInput: Locator
   pageNumberInput: Locator
-  clickOnTable: Locator
+
+  departmentList: string[] = [
+      'QA',
+      'Legal',
+      'Insurance',
+      'Compliance',
+      'HR',
+      'Product Manager',
+      'AQA',
+      'Manual',
+      'Support',
+      'Test',
+  ]
 
   constructor(page: Page) {
     this.page = page
+
+    this.registrationModalWindow = new RegistrationModalWindow(this.page)
+
     this.addUserButton = this.page.locator('//div[@class= "web-tables-wrapper"]//button[@id= "addNewRecordButton"]')
-    this.modalWindow = this.page.locator('//div[@class="modal-header"]')
-    this.closeModalWindowButton = this.page.locator('//div[@role= "dialog"]//button[@class= "close"]')
-    this.submitButtonInModalWindow = this.page.locator('//div[@class= "modal-body"]//button[@id= "submit"]')
     this.searchInput = this.page.locator('//input[@id= "searchBox"]')
     this.noRowsInput = this.page.locator('//div[@class="rt-noData"]')
     this.pageNumberInput = this.page.locator('//div[@class="pagination-bottom"]//div[@class="-pageJump"]/input')
-    this.clickOnTable = this.page.locator('//div[@class="rt-tr-group"][5]//div[@class="rt-td"][3]')
-  }
-
-  async testPause(): Promise<void> {
-    await this.page.pause()
   }
 
   async clickAddUserButton(): Promise<void> {
     await this.addUserButton.click()
   }
 
-  async getUserData(userEmail: string, cellNames: string): Promise<string> {
-   const keyWordFromUserLocator: { [key: string]: number} = {
+  async getUserData(userEmail: string, cellNames: SortingCell): Promise<string> {
+   const keyWordFromUserLocator: { [key : string] : number } = {
       firstName: 1,
       lastName: 2,
       age: 3,
-      email: 4,
+      userEmail: 4,
       salary: 5,
       department: 6
     }
@@ -49,24 +58,25 @@ export default class WebTablesPage {
     return cellContent
   }
 
-  async isUserDataMatch(expectUserData: string, currentUserData: string): Promise<void> {
-    expect(expectUserData).toBe(currentUserData)
+  public async fillSearchInput(userData: string): Promise<void> {
+    await this.fill(this.searchInput, userData)
   }
 
-  async isUserNotDataMatch(expectUserData: string, currentUserData: string): Promise<void> {
-    expect(expectUserData).not.toBe(currentUserData)
+  public async fillPageNumberInput(pageNumber: number): Promise<void> {
+    await this.fill(this.pageNumberInput, `${pageNumber}`)
+    await this.page.keyboard.press('Enter')
   }
 
-  async fillSearchInput(userData: string): Promise<void> {
-    await this.searchInput.fill(userData)
+  private async fill(locatorName: Locator, fillData: string): Promise<void> {
+    await locatorName.fill(fillData)
   }
 
-  async clickOnSortingCell(cellName: string): Promise<void> {
+  async clickOnSortingCell(cellName: SortingCell): Promise<void> {
     const keyWordFromCellLocator: { [key: string]: number} = {
       firstName: 1,
       lastName: 2,
       age: 3,
-      email: 4,
+      userEmail: 4,
       salary: 5,
       department: 6
     }
@@ -74,12 +84,12 @@ export default class WebTablesPage {
     //div[@class="rt-th rt-resizable-header -cursor-pointer"][${keyWordFromCellLocator[cellName]}]`).click()
   }
 
-  async getFirstUserData(cellName: string): Promise<string> {
+  async getFirstUserData(cellName: SortingCell): Promise<string> {
     const keyWordFromCellUserData: { [key: string]: number} = {
       firstName: 1,
       lastName: 2,
       age: 3,
-      email: 4,
+      userEmail: 4,
       salary: 5,
       department: 6
     }
@@ -93,31 +103,23 @@ export default class WebTablesPage {
     return cellContent
   }
 
-  async editUser(): Promise<void> {
-    await this.page.locator(`//div[@class="rt-tr-group"][1]//div[@class="rt-td"][7]//span[@title= "Edit"]`).click()
+  async clickUsersActionButtonByUserEmail(action: 'Edit' | 'Delete', userEmail: string): Promise<void> {
+    await this.page.locator(`//div[@class="rt-tr-group"]//div[text()="${userEmail}"]/parent::div//span[@title="${action}"]`).click()
   }
 
-  async deleteUser(): Promise<void> {
-    await this.page.locator(`//div[@class="rt-tr-group"][1]//div[@class="rt-td"][7]//span[@title= "Delete"]`).click()
+  async verifyIndicatorTableEmpty(state: VisibilityState): Promise<void> {
+    await expect(this.noRowsInput)[state]()
   }
 
-  async isTableEmpty(): Promise<void> {
-    await expect(this.noRowsInput).toBeVisible()
+  async checkVisibilityUserByEmail(userEmail: string, state: VisibilityState): Promise<void> {
+    const element = this.page.locator(`//div[text()="${userEmail}"]`)
+
+    await expect(element)[state]()
   }
 
-  async selectRowsOnPage(manyRows: string): Promise<void> {
+  async rowsPerPage(rows: number): Promise<void> {
     await this.page.locator('//div[@class="pagination-bottom"]' +
-      '//select[@aria-label="rows per page"]').selectOption(`${manyRows}`)
-  }
-
-  async getPageNumber(): Promise<string> {
-    let pageNumber: string | null = await this.pageNumberInput.getAttribute('value')
-
-    if (pageNumber === null) {
-      process.exit(1)
-    }
-
-    return pageNumber
+      '//select[@aria-label="rows per page"]').selectOption(`${rows}`)
   }
 
   async clickPaginate(nextOrPrevious: string): Promise<void> {
@@ -125,23 +127,36 @@ export default class WebTablesPage {
     //button[text()="${nextOrPrevious}"]`).click()
   }
 
-  async isPageMatch(beforePage: string): Promise<void> {
-    let currentPage: string | null = await this.pageNumberInput.getAttribute('Value')
-    expect(beforePage).toBe(currentPage)
+  async checkRowsAmount(row: SelectingAmountRows): Promise<void> {
+    const rowAmount = this.page.locator(`//div[@class="rt-tbody"]//div[@class="rt-tr-group"]`)
+    expect(await rowAmount.count()).toStrictEqual(row)
   }
 
-  async isPageNotMatch(beforePage: string): Promise<void> {
-    let currentPage: string | null = await this.pageNumberInput.getAttribute('Value')
-    expect(beforePage).not.toBe(currentPage)
+  async addUser(index: number = 1): Promise<string> {
+    await this.addUserButton.click()
+    await this.registrationModalWindow.fillInputDataByInputName('firstName', `${defaultUserObject.firstName}${index}`)
+    await this.registrationModalWindow.fillInputDataByInputName('lastName', `${defaultUserObject.lastName}${index}`)
+    await this.registrationModalWindow.fillInputDataByInputName('userEmail', `${index}${defaultUserObject.userEmail}`)
+    await this.registrationModalWindow.fillInputDataByInputName('age', `${defaultUserObject.age}${index}`)
+    await this.registrationModalWindow.fillInputDataByInputName('salary', `${index}${defaultUserObject.salary}`)
+    await this.registrationModalWindow.fillInputDataByInputName('department', `${this.departmentList[index - 1]}`)
+    await this.registrationModalWindow.clickSubmitButtonInModalWindow()
+
+    return `${index}${defaultUserObject.userEmail}`
   }
 
-  async fillPageNumbers(pageNumber: string): Promise<void> {
-    await this.pageNumberInput.fill(pageNumber)
-    await this.clickOnTable.click()
+  async usersGenerator(userCount: number): Promise<string[]> {
+    const usersEmailArray: string[] = []
+    for (let index: number = 1; index <= userCount; index++) {
+      usersEmailArray.push(await this.addUser(index))
+    }
+
+    return usersEmailArray
   }
 
-  async checkAmountRows(row: number): Promise<void> {
-    const getCurrentAmountRows = await this.page.$$(`//div[@class="rt-tbody"]//div[@class="rt-tr-group"]`)
-    expect(getCurrentAmountRows).toHaveLength(row)
+  async deleteAddedUsers(usersEmail: string[]): Promise<void> {
+    for (const email of usersEmail) {
+      await this.clickUsersActionButtonByUserEmail('Delete', email)
+    }
   }
 }

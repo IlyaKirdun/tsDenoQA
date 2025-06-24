@@ -1,4 +1,5 @@
 import {Page} from "@playwright/test"
+import {ElementsOnMainPage} from "../utils/types";
 
 export default class MainPage {
   page: Page
@@ -7,11 +8,11 @@ export default class MainPage {
     this.page = page
   }
 
-  async gotoMainPage(): Promise<void> {
-    await this.page.goto('https://demoqa.com', { waitUntil: 'domcontentloaded' })
+  async navigateToMainPage(): Promise<void> {
+    await this.page.goto('/', { waitUntil: 'domcontentloaded' })
   }
 
-  async gotoCard(keyWordFromLocator: string): Promise<void> {
-    await this.page.locator(`//h5[text()="${keyWordFromLocator}"]`).click()
+  async clickOnElement(elementName: ElementsOnMainPage): Promise<void> {
+    await this.page.locator(`//h5[text()="${elementName}"]`).click()
   }
 }

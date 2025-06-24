@@ -21,10 +21,10 @@ test.describe('Check the functioning of the "Text Box" section', () => {
     textBoxPage = new TextBoxPage(page)
     navigationBar = new NavigationBar(page)
 
-    await mainPage.gotoMainPage()
+    await mainPage.navigateToMainPage()
     await removeAds(page)
-    await mainPage.gotoCard('Elements')
-    await navigationBar.gotoNavBar('Elements', 'Text Box')
+    await mainPage.clickOnElement('Elements')
+    await navigationBar.clickElementInNavigationBar('Text Box')
     await removeAds(page)
   })
 
@@ -63,7 +63,7 @@ test.describe('Check the functioning of the "Text Box" section', () => {
     })
 
     await test.step(`Match the "Permanent Address" output field and ${testData.permanentAddress}`, async () => {
-      await textBoxPage.isDataMatch(`Permanent Address :${testData.permanentAddress}`, textBoxPage.permanentAddressOutput)
+      await textBoxPage.isDataMatch(`Permananet Address :${testData.permanentAddress}`, textBoxPage.permanentAddressOutput)
     })
   })
 })

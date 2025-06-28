@@ -1,0 +1,58 @@
+Проверка функционала на странице "Button":
+
+Test Case 1: Проверка функционала кнопки "Double Click Me".
+Preconditions:
+- Открыть браузер и перейти на 'https://demoqa.com/'.
+- Перейти в "Elements", затем нажать на "Button" в меню навигации.
+
+Steps:
+1. Нажимаем левой кнопкой два раза по кнопке "Double Click Me".
+Expected result:
+- Кнопка нажата.
+
+2. Проверяем наличие сообщения "You have done a double click".
+Expected result:
+- Сообщение отображается.
+
+Post-condition:
+- Закрыть браузер.
+
+---
+
+Test Case 2: Проверка функционала кнопки "Right Click Me".
+Preconditions:
+- Открыть браузер и перейти на 'https://demoqa.com/'.
+- Перейти в "Elements", затем нажать на "Button" в меню навигации.
+
+Steps:
+1. Нажимаем правой кнопкой по кнопке "Right Click Me".
+Expected result:
+- Кнопка нажата.
+
+2. Проверяем наличие сообщения "You have done a right click".
+Expected result:
+- Сообщение отображается.
+
+Post-condition:
+- Закрыть браузер.
+
+---
+
+Test Case 3: Проверка функционала кнопки "Click Me".
+Preconditions:
+- Открыть браузер и перейти на 'https://demoqa.com/'.
+- Перейти в "Elements", затем нажать на "Button" в меню навигации.
+
+Steps:
+1. Нажимаем левой кнопкой по кнопке "Click Me".
+Expected result:
+- Кнопка нажата.
+
+2. Проверяем наличие сообщения "You have done a dynamic click".
+Expected result:
+- Сообщение отображается.
+
+Post-condition:
+- Закрыть браузер.
+
+---

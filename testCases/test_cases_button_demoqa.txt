@@ -44,13 +44,52 @@ Preconditions:
 - Перейти в "Elements", затем нажать на "Button" в меню навигации.
 
 Steps:
-1. Нажимаем левой кнопкой по кнопке "Click Me".
+1. Сохраняем значение аргумента "id" у кнопки "Click Me".
+Expected result:
+- Значение сохранено.
+
+2. Обновляем страницу.
+Expected result:
+- Страница обновлена.
+
+3. Сравниваем значение аргумента "id" у кнопки "Click Me" с сохранённым.
+Expected result:
+- Значения не совпадают.
+
+4. Нажимаем левой кнопкой по кнопке "Click Me".
 Expected result:
 - Кнопка нажата.
 
-2. Проверяем наличие сообщения "You have done a dynamic click".
+5. Проверяем наличие сообщения "You have done a dynamic click".
 Expected result:
 - Сообщение отображается.
+
+Post-condition:
+- Закрыть браузер.
+
+---
+
+Test Case 4: Проверка сохранения отображения сообщения при нажатии кнопок: "Right Click Me" и "Click Me".
+Preconditions:
+- Открыть браузер и перейти на 'https://demoqa.com/'.
+- Перейти в "Elements", затем нажать на "Button" в меню навигации.
+
+Steps:
+1. Нажимаем правой кнопкой по кнопке "Right Click Me".
+Expected result:
+- Кнопка нажата.
+
+2. Проверяем наличие сообщения "You have done a right click".
+Expected result:
+- Сообщение отображается.
+
+3. Нажимаем левой кнопкой по кнопке "Click Me".
+Expected result:
+- Кнопка нажата.
+
+4. Проверяем наличие сообщений: "You have done a dynamic click" и "You have done a right click".
+Expected result:
+- Сообщения отображается.
 
 Post-condition:
 - Закрыть браузер.

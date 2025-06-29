@@ -1,5 +1,5 @@
-import {expect, Locator, Page} from "@playwright/test"
-import {VisibilityState} from "../utils/types";
+import {Locator, Page} from "@playwright/test"
+import {assertByState} from "../utils/functions";
 
 export default class ButtonPage {
     page: Page
@@ -22,10 +22,21 @@ export default class ButtonPage {
         await this.rightClickButton.click({ button: "right"})
     }
 
-    async checkVisibilityButtonMessage(buttonName: 'double' | 'right' | 'dynamic', state: VisibilityState): Promise<void> {
-        const buttonMessage: Locator = this.page.locator(`//p[@id="${buttonName}ClickMessage"]`)
+    async verifyMatchButtonMessage(locatorName: 'double' | 'right' | 'dynamic', state: 'match' | 'notMatch'): Promise<void> {
+        const buttonMessages: { [key : string] : string } = {
+            double: 'You have done a double click',
+            right: 'You have done a right click',
+            dynamic: 'You have done a dynamic click',
+        }
 
-        await expect(buttonMessage)[state]()
+        const expectedButtonMessage: string = buttonMessages[locatorName]
+        const actualButtonMessage: string | null = await this.page.locator(`//p[@id="${locatorName}ClickMessage"]`).textContent()
+
+        if (actualButtonMessage === null) {
+            process.exit(1)
+        }
+
+        await assertByState(actualButtonMessage, expectedButtonMessage, state)
     }
 
     async getCurrentDynamicButtonId(){

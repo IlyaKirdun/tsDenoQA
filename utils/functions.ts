@@ -4,6 +4,10 @@ export  async function testPause(page: Page): Promise<void> {
   await page.pause()
 }
 
+export async function reloadPage(page: Page): Promise<void> {
+  await page.reload()
+}
+
 export async function removeAds(page: Page): Promise<void> {
   const extendAds:string[] = [
     '//div[@id="fixedban"]',

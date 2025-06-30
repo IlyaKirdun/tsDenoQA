@@ -1,9 +1,5 @@
 import {Page, expect, Locator} from '@playwright/test'
 
-export  async function testPause(page: Page): Promise<void> {
-  await page.pause()
-}
-
 export async function removeAds(page: Page): Promise<void> {
   const extendAds:string[] = [
     '//div[@id="fixedban"]',

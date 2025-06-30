@@ -270,32 +270,32 @@ test.describe('Проверка функциональности на стран
     })
 
     await test.step(`Получаем данные ячейки "First Name" и сверяем с ${testDataForCreateUser['firstName']}.`, async () => {
-      let currentFirstNameUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'firstName')
+      const currentFirstNameUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'firstName')
       await assertByState(testDataForCreateUser['firstName'], currentFirstNameUser, 'match')
     })
 
     await test.step(`Получаем данные ячейки "Last Name" и сверяем с ${testDataForCreateUser['lastName']}.`, async () => {
-      let currentLastNameUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'lastName')
+      const currentLastNameUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'lastName')
       await assertByState(testDataForCreateUser['lastName'], currentLastNameUser, 'match')
     })
 
     await test.step(`Получаем данные ячейки "Age" и сверяем с ${testDataForCreateUser['age']}.`, async () => {
-      let currentAgeUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'age')
+      const currentAgeUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'age')
       await assertByState(testDataForCreateUser['age'], currentAgeUser, 'match')
     })
 
     await test.step(`Получаем данные ячейки "Email" и сверяем с ${testDataForCreateUser['userEmail']}.`, async () => {
-      let currentEmailUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'userEmail')
+      const currentEmailUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'userEmail')
       await assertByState(testDataForCreateUser['userEmail'], currentEmailUser, 'match')
     })
 
     await test.step(`Получаем данные ячейки "Salary" и сверяем с ${testDataForCreateUser['salary']}.`, async () => {
-      let currentSalaryUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'salary')
+      const currentSalaryUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'salary')
       await assertByState(testDataForCreateUser['salary'], currentSalaryUser, 'match')
     })
 
     await test.step(`Получаем данные ячейки "Department" и сверяем с ${testDataForCreateUser['department']}.`, async () => {
-      let currentDepartmentUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'department')
+      const currentDepartmentUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'department')
       await assertByState(testDataForCreateUser['department'], currentDepartmentUser, 'match')
     })
 
@@ -312,7 +312,7 @@ test.describe('Проверка функциональности на стран
     })
 
     await test.step('Проверяем результат поиска.', async () => {
-      let currentEmailUser = await webTablesPage.getUserData(testDataExistingUser['userEmail'], 'userEmail')
+      const currentEmailUser = await webTablesPage.getUserData(testDataExistingUser['userEmail'], 'userEmail')
       await assertByState(testDataExistingUser['userEmail'], currentEmailUser, 'match')
     })
   })
@@ -471,32 +471,32 @@ test.describe('Проверка функциональности на стран
     })
 
     await test.step(`Получаем данные ячейки "First Name" и сверяем с ${testDataForCreateUser['firstName']}.`, async () => {
-      let currentFirstNameUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'firstName')
+      const currentFirstNameUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'firstName')
       await assertByState(testDataForCreateUser['firstName'], currentFirstNameUser, 'match')
     })
 
     await test.step(`Получаем данные ячейки "Last Name" и сверяем с ${testDataForCreateUser['lastName']}.`, async () => {
-      let currentLastNameUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'lastName')
+      const currentLastNameUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'lastName')
       await assertByState(testDataForCreateUser['lastName'], currentLastNameUser, 'match')
     })
 
     await test.step(`Получаем данные ячейки "Age" и сверяем с ${testDataForCreateUser['age']}.`, async () => {
-      let currentAgeUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'age')
+      const currentAgeUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'age')
       await assertByState(testDataForCreateUser['age'], currentAgeUser, 'match')
     })
 
     await test.step(`Получаем данные ячейки "Email" и сверяем с ${testDataForCreateUser['userEmail']}.`, async () => {
-      let currentEmailUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'userEmail')
+      const currentEmailUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'userEmail')
       await assertByState(testDataForCreateUser['userEmail'], currentEmailUser, 'match')
     })
 
     await test.step(`Получаем данные ячейки "Salary" и сверяем с ${testDataForCreateUser['salary']}.`, async () => {
-      let currentSalaryUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'salary')
+      const currentSalaryUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'salary')
       await assertByState(testDataForCreateUser['salary'], currentSalaryUser, 'match')
     })
 
     await test.step(`Получаем данные ячейки "Department" и сверяем с ${testDataForCreateUser['department']}.`, async () => {
-      let currentDepartmentUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'department')
+      const currentDepartmentUser = await webTablesPage.getUserData(testDataForCreateUser['userEmail'], 'department')
       await assertByState(testDataForCreateUser['department'], currentDepartmentUser, 'match')
     })
 

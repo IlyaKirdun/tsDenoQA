@@ -56,13 +56,13 @@ test.describe('Check the functioning of the "Check Box" section', () => {
 
   test('CASE_1: Verify expand folders on page', async () => {
     await test.step(`Click on expand button in ${foldersExpandName} folders`, async () => {
-      for(let elementName of foldersExpandName){
+      for(const elementName of foldersExpandName){
         await checkBoxPage.clickExpandButtonFolderName(elementName)
       }
     })
 
     await test.step(`Check changed state buttons`, async () => {
-      for(let elementName of foldersExpandName){
+      for(const elementName of foldersExpandName){
         await checkBoxPage.isExpandButtonChangedState(elementName, 'toBeVisible')
       }
     })
@@ -77,7 +77,7 @@ test.describe('Check the functioning of the "Check Box" section', () => {
   test('CASE_2: Checking the Deployment Status on page', async () => {
     await test.step(`Precondition`, async () => {
       await test.step(`Click on expand button in ${foldersExpandName} folders`, async () => {
-        for(let folderName of foldersExpandName){
+        for(const folderName of foldersExpandName){
           await checkBoxPage.clickExpandButtonFolderName(folderName)
         }
       })
@@ -92,7 +92,7 @@ test.describe('Check the functioning of the "Check Box" section', () => {
     })
 
     await test.step(`Check changed state buttons`, async () => {
-      for(let elementName of foldersExpandName){
+      for(const elementName of foldersExpandName){
         await checkBoxPage.isExpandButtonChangedState(elementName, 'toBeVisible')
       }
     })
@@ -169,7 +169,7 @@ test.describe('Check the functioning of the "Check Box" section', () => {
     })
 
     await test.step(`Click on checkbox files: notes, react, public, wordFile`, async () => {
-      for(let fileName of testDataForClickOfSeveralFiles){
+      for(const fileName of testDataForClickOfSeveralFiles){
         await checkBoxPage.clickCheckboxButtonElementName([fileName])
       }
     })

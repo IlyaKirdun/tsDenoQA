@@ -25,7 +25,7 @@ export default class TextBoxPage {
     this.permanentAddressOutput = page.locator('//p[@id="permanentAddress"]')
   }
 
-  async fillInputByName(testData:any, inputName: Locator): Promise<void> {
+  async fillInputByName(testData: string, inputName: Locator): Promise<void> {
     await inputName.fill(testData)
   }
 
@@ -33,7 +33,7 @@ export default class TextBoxPage {
     await this.submitButton.click()
   }
 
-  async isDataMatch(testData:any,inputData: Locator): Promise<void> {
+  async isDataMatch(testData: string,inputData: Locator): Promise<void> {
     const currentData: string | null = await inputData.textContent()
    expect(testData).toBe(currentData)
   }

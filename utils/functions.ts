@@ -9,7 +9,7 @@ export async function removeAds(page: Page): Promise<void> {
   ]
 
   for (const ads of extendAds) {
-    let loc: Locator = page.locator(ads)
+    const loc: Locator = page.locator(ads)
 
     await page.waitForLoadState()
 
@@ -25,13 +25,13 @@ export async function assertByState(
     state: 'match' | 'notMatch' = 'match'
 ): Promise<void> {
   // выбираем нужный expect: либо обычный, либо с .not
-  const assertion: any = state === 'match' ? expect(actual) : expect(actual).not;
+  const assertion = state === 'match' ? expect(actual) : expect(actual).not;
   // вызываем toBe на выбранном assertion
   assertion.toBe(expected);
 }
 
 export function getParentNameByChildName<T> (obj: {[key: string]: T[]}, value: T): string | undefined {
-  for(let key in obj){
+  for(const key in obj){
     if(obj[key].includes(value)){
       return key
     }

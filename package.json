@@ -1,6 +1,6 @@
 {
   "name": "demoqa",
-  "version": "1.5.11",
+  "version": "1.6.12",
   "description": "",
   "scripts": {
     "lint": "npx eslint",

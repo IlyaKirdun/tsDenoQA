@@ -10,7 +10,7 @@ export default class ButtonPage {
     constructor(page: Page) {
         this.page = page
         this.doubleClickButton = this.page.locator('//button[@id="doubleClickBtn"]')
-        this.rightClickButton = this.page.locator('//button[@id="doubleClickBtn"]')
+        this.rightClickButton = this.page.locator('//button[@id="rightClickBtn"]')
         this.dynamicButton = this.page.locator('//button[text()="Click Me"]')
     }
 
@@ -19,7 +19,7 @@ export default class ButtonPage {
     }
 
     async clickRightClickButton() {
-        await this.rightClickButton.click({ button: "right"})
+        await this.rightClickButton.click({ button: 'right' })
     }
 
     async verifyMatchButtonMessage(locatorName: 'double' | 'right' | 'dynamic'): Promise<void> {
@@ -40,6 +40,12 @@ export default class ButtonPage {
     }
 
     async getCurrentDynamicButtonId(){
-        await this.dynamicButton.getAttribute("id")
+        const currentId: string | null = await this.dynamicButton.getAttribute("id")
+
+        if (currentId === null) {
+            process.exit(1)
+        }
+
+        return currentId
     }
 }

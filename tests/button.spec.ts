@@ -67,7 +67,7 @@ test.describe('Проверка функциональности на стран
     })
   })
 
-  test('CASE_4: Проверка сохранения отображения сообщения при нажатии кнопок: "Right Click Me" и "Click Me".', async () => {
+  test('CASE_4: Проверка сохранения отображения сообщения при нажатии кнопок: "Right Click Me", "Click Me", "Double Click Me".', async () => {
     await test.step('Нажимаем правой кнопкой по кнопке "Right Click Me".', async () => {
       await buttonPage.clickRightClickButton()
     })
@@ -83,6 +83,17 @@ test.describe('Проверка функциональности на стран
     await test.step('Проверяем наличие сообщений: "You have done a dynamic click" и "You have done a right click".', async () => {
       await buttonPage.verifyMatchButtonMessage('dynamic')
       await buttonPage.verifyMatchButtonMessage('right')
+    })
+
+    await test.step('Нажимаем правой кнопкой по кнопке "Click Me".', async () => {
+      await buttonPage.clickButtonByState(buttonPage.doubleClickButton, 'dblclick')
+    })
+
+    await test.step('Проверяем наличие сообщений: "You have done a dynamic click" и "You have done a right click".', async () => {
+      await buttonPage.verifyMatchButtonMessage('dynamic')
+      await buttonPage.verifyMatchButtonMessage('right')
+      await buttonPage.verifyMatchButtonMessage('double')
+
     })
   })
 })

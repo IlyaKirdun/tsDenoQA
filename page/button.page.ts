@@ -22,7 +22,7 @@ export default class ButtonPage {
         await this.rightClickButton.click({ button: "right"})
     }
 
-    async verifyMatchButtonMessage(locatorName: 'double' | 'right' | 'dynamic', state: 'match' | 'notMatch'): Promise<void> {
+    async verifyMatchButtonMessage(locatorName: 'double' | 'right' | 'dynamic'): Promise<void> {
         const buttonMessages: { [key : string] : string } = {
             double: 'You have done a double click',
             right: 'You have done a right click',
@@ -36,7 +36,7 @@ export default class ButtonPage {
             process.exit(1)
         }
 
-        await assertByState(actualButtonMessage, expectedButtonMessage, state)
+        await assertByState(actualButtonMessage, expectedButtonMessage)
     }
 
     async getCurrentDynamicButtonId(){

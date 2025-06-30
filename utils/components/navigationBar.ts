@@ -19,7 +19,7 @@ export default class NavigationBar {
   }
 
 async clickElementInNavigationBar(childElementName: string): Promise<void> {
-    let parentElementName: string | undefined = getParentNameByChildName(this.navigationBarStructure, childElementName)
+    const parentElementName: string | undefined = getParentNameByChildName(this.navigationBarStructure, childElementName)
 
   if(typeof parentElementName !== 'string' ){
     throw new Error(`Не найден родительский элемент для "${childElementName}"`)

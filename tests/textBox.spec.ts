@@ -9,7 +9,7 @@ test.describe('Check the functioning of the "Text Box" section', () => {
   let navigationBar: NavigationBar
   let textBoxPage: TextBoxPage
 
-  const testData= {
+  const testData: { [key: string]: string } = {
     name: 'Ivan Ivanov',
     email: 'ivanov@gmail.com',
     currentAddress: 'address 1',

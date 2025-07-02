@@ -1,7 +1,7 @@
 import {BrowserContext, expect, Locator, Page,} from "@playwright/test";
 import {locatorLinkNames} from "../utils/types";
 
-export default class ButtonPage {
+export default class linksPage {
   page: Page
   context: BrowserContext
   dynamicLink: Locator
@@ -22,8 +22,8 @@ export default class ButtonPage {
     const newPage: Page = await newPagePromise
     const numberOfPages: number = this.context.pages().length
 
-    await newPage.waitForURL(`/https://demoqa.com`)
-    await expect(newPage.locator('//head//title[text()="DEMOQA"]')).toHaveText('DEMOQA')
+    await newPage.waitForURL('https://demoqa.com')
+    await expect(newPage).toHaveURL('https://demoqa.com')
     expect(numberOfPages).toBe(2)
   }
 
@@ -61,12 +61,13 @@ export default class ButtonPage {
   }
 
   async verifyApiResponse(statusCode: number, statusText: string): Promise<void> {
-    let url: string = ''
+    let url: string = statusText.toLowerCase().replace(' ', '-')
 
-    if(url == 'Not Found'){
+    if(url == 'not-found'){
       url = 'invalid-url'
-    } else {
-      url = statusText.toLowerCase().replace(' ', '-')
+    }
+    if (url == 'moved'){
+      statusText = 'Moved Permanently'
     }
 
     const responsePromise= this.page.waitForResponse(response =>
@@ -80,6 +81,8 @@ export default class ButtonPage {
   }
 
   async getLinkMessage(): Promise<string> {
+    await new Promise(resolve => setTimeout(resolve, 500))
+
     const actualLinkMassage: string | null = await this.linkMessage.textContent()
 
     if(actualLinkMassage == null){

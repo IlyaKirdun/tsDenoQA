@@ -15,7 +15,7 @@ export default class linksPage {
     this.linkMessage = page.locator('//p[@id="linkResponse"]')
   }
 
-  async clickLinkByName(locatorName: 'simpleLink' | 'dynamicLink'): Promise<void> {
+  async clickAndVerifyLinkByName(locatorName: 'simpleLink' | 'dynamicLink'): Promise<void> {
     const newPagePromise: Promise<Page> = this.context.waitForEvent('page')
 
     await this.page.locator(`//a[@id="${locatorName}"]`).click()
@@ -71,7 +71,7 @@ export default class linksPage {
     }
 
     const responsePromise= this.page.waitForResponse(response =>
-      response.url() == `https://demoqa.com/${url}`
+      response.url() == `/${url}`
       && response.status() == statusCode
       && response.statusText() == statusText
     )

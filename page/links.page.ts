@@ -71,7 +71,7 @@ export default class linksPage {
     }
 
     const responsePromise= this.page.waitForResponse(response =>
-      response.url() == `/${url}`
+      response.url() == `https://demoqa.com/${url}`
       && response.status() == statusCode
       && response.statusText() == statusText
     )

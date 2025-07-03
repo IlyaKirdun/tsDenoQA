@@ -23,8 +23,8 @@ test.describe('Проверка функциональности на стран
     })
 
     test('CASE_1: Проверяем функционал ссылки "Home".', async () => {
-        await test.step('Переходим по ссылке "Home".', async () => {
-            await linksPage.clickLinkByName('simpleLink')
+        await test.step('Переходим по ссылке "Home", проверяем переход и ссылку.', async () => {
+            await linksPage.clickAndVerifyLinkByName('simpleLink')
         })
     })
 
@@ -48,8 +48,8 @@ test.describe('Проверка функциональности на стран
             await assertByState(initialDynamicLink, actualDynamicLink, 'notMatch')
         })
 
-        await test.step('Переходим по динамической ссылке "Home".', async () => {
-            await linksPage.clickLinkByName('dynamicLink')
+        await test.step('Переходим по динамической ссылке "Home", проверяем переход и ссылку.', async () => {
+            await linksPage.clickAndVerifyLinkByName('dynamicLink')
         })
     })
 
@@ -59,6 +59,10 @@ test.describe('Проверка функциональности на стран
 
         await test.step('Нажимаем на ссылку "Created".', async () => {
             await linksPage.clickLink('created')
+        })
+
+        await test.step('Проверяем сообщение.', async () => {
+            await linksPage.verifyLinkMessage('created')
         })
 
         await test.step('Проверяем ответ на запрос.', async () => {
@@ -74,6 +78,10 @@ test.describe('Проверка функциональности на стран
             await linksPage.clickLink('no-content')
         })
 
+        await test.step('Проверяем сообщение.', async () => {
+            await linksPage.verifyLinkMessage('no-content')
+        })
+
         await test.step('Проверяем ответ на запрос.', async () => {
             await linksPage.verifyApiResponse(statusCode, statusMessage)
         })
@@ -85,6 +93,10 @@ test.describe('Проверка функциональности на стран
 
         await test.step('Нажимаем на ссылку "Moved".', async () => {
             await linksPage.clickLink('moved')
+        })
+
+        await test.step('Проверяем сообщение.', async () => {
+            await linksPage.verifyLinkMessage('moved')
         })
 
         await test.step('Проверяем ответ на запрос.', async () => {
@@ -100,6 +112,10 @@ test.describe('Проверка функциональности на стран
             await linksPage.clickLink('bad-request')
         })
 
+        await test.step('Проверяем сообщение.', async () => {
+            await linksPage.verifyLinkMessage('bad-request')
+        })
+
         await test.step('Проверяем ответ на запрос.', async () => {
             await linksPage.verifyApiResponse(statusCode, statusMessage)
         })
@@ -111,6 +127,10 @@ test.describe('Проверка функциональности на стран
 
         await test.step('Нажимаем на ссылку "Unauthorized".', async () => {
             await linksPage.clickLink('unauthorized')
+        })
+
+        await test.step('Проверяем сообщение.', async () => {
+            await linksPage.verifyLinkMessage('unauthorized')
         })
 
         await test.step('Проверяем ответ на запрос.', async () => {
@@ -126,6 +146,10 @@ test.describe('Проверка функциональности на стран
             await linksPage.clickLink('forbidden')
         })
 
+        await test.step('Проверяем сообщение.', async () => {
+            await linksPage.verifyLinkMessage('forbidden')
+        })
+
         await test.step('Проверяем ответ на запрос.', async () => {
             await linksPage.verifyApiResponse(statusCode, statusMessage)
         })
@@ -137,6 +161,10 @@ test.describe('Проверка функциональности на стран
 
         await test.step('Нажимаем на ссылку "Not Found".', async () => {
             await linksPage.clickLink('invalid-url')
+        })
+
+        await test.step('Проверяем сообщение.', async () => {
+            await linksPage.verifyLinkMessage('invalid-url')
         })
 
         await test.step('Проверяем ответ на запрос.', async () => {

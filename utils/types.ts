@@ -34,15 +34,3 @@ export type ElementsOnMainPage =
     | 'Book Store Application'
 
 export type VisibilityState = 'toBeVisible'|'toBeHidden'
-
-export type locatorLinkNames =
-    | 'created'
-    | 'no-content'
-    | 'moved'
-    | 'bad-request'
-    | 'unauthorized'
-    | 'forbidden'
-    | 'invalid-url'
-
-
-

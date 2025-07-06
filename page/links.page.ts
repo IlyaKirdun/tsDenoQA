@@ -48,7 +48,7 @@ export default class linksPage {
       'moved': 'Link has responded with staus 301 and status text Moved Permanently',
       'bad-request': 'Link has responded with staus 400 and status text Bad Request',
       'unauthorized': 'Link has responded with staus 401 and status text Unauthorized',
-      'forbidden': 'Link has responded with staus 502 and status text Bad Gateway',
+      'forbidden': 'Link has responded with staus 403 and status text Forbidden',
       'invalid-url': 'Link has responded with staus 404 and status text Not Found'
     }
     const actualMessage: string | null = await this.linkMessage.textContent()
@@ -71,7 +71,7 @@ export default class linksPage {
     }
 
     const responsePromise= this.page.waitForResponse(response =>
-      response.url() == `https://demoqa.com/${url}`
+      response.url() == `${process.env.BASE_URL}/${url}`
       && response.status() == statusCode
       && response.statusText() == statusText
     )

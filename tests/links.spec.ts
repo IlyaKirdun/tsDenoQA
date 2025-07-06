@@ -23,7 +23,7 @@ test.describe('Проверка функциональности на стран
     })
 
     test('CASE_1: Проверяем функционал ссылки "Home".', async () => {
-        await test.step('Переходим по ссылке "Home", проверяем переход и ссылку.', async () => {
+        await test.step('Переходим по ссылке "Home", ожидаем новую вкладку с url "https://demoqa.com".', async () => {
             await linksPage.clickAndVerifyLinkByName('simpleLink')
         })
     })
@@ -48,7 +48,7 @@ test.describe('Проверка функциональности на стран
             await assertByState(initialDynamicLink, actualDynamicLink, 'notMatch')
         })
 
-        await test.step('Переходим по динамической ссылке "Home", проверяем переход и ссылку.', async () => {
+        await test.step('Переходим по динамической ссылке "Home", ожидаем новую вкладку с url "https://demoqa.com".', async () => {
             await linksPage.clickAndVerifyLinkByName('dynamicLink')
         })
     })

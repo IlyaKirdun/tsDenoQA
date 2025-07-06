@@ -38,6 +38,6 @@ jobs:
 
       - name: Run Playwright tests
         run: npm run tests
-
-      - name: dotenv
-        run: "BASE_URL: ${{ secrets.BASE_URL }}"
+        
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}

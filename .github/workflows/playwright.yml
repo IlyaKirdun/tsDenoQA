@@ -16,6 +16,7 @@ jobs:
     env:
       CI: true
       GITHUB_ACTIONS: true
+      BASE_URL: ${{ secrets.BASE_URL }}
 
     steps:
       - name: Checkout code
@@ -38,6 +39,3 @@ jobs:
 
       - name: Run Playwright tests
         run: npm run tests
-        
-        env:
-          BASE_URL: ${{ secrets.BASE_URL }}

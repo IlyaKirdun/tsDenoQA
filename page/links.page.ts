@@ -70,14 +70,13 @@ export default class linksPage {
       statusText = 'Moved Permanently'
     }
 
-    const responsePromise= this.page.waitForResponse(response =>
-      response.url() == `${process.env.BASE_URL}/${url}`
+    await this.page.locator(`//a[@id="${url}"]`).click()
+
+    await this.page.waitForResponse(response =>
+      response.url() == `${process.env.BASE_URL}${url}`
       && response.status() == statusCode
       && response.statusText() == statusText
     )
-
-    await this.page.locator(`//a[@id="${url}"]`).click()
-    await responsePromise
   }
 
   async getLinkMessage(): Promise<string> {

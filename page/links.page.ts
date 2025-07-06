@@ -37,7 +37,7 @@ export default class linksPage {
     return actualLinkName
   }
 
-  async clickLink(linkName: locatorLinkNames): Promise<void> {
+  async clickLinkByName(linkName: locatorLinkNames): Promise<void> {
     await this.page.locator(`//a[@id="${linkName}"]`).click()
   }
 

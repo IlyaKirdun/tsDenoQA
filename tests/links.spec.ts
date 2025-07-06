@@ -58,7 +58,7 @@ test.describe('Проверка функциональности на стран
         const statusMessage = 'Created'
 
         await test.step('Нажимаем на ссылку "Created".', async () => {
-            await linksPage.clickLink('created')
+            await linksPage.clickLinkByName('created')
         })
 
         await test.step('Проверяем сообщение.', async () => {
@@ -75,7 +75,7 @@ test.describe('Проверка функциональности на стран
         const statusMessage = 'No Content'
 
         await test.step('Нажимаем на ссылку "No Content".', async () => {
-            await linksPage.clickLink('no-content')
+            await linksPage.clickLinkByName('no-content')
         })
 
         await test.step('Проверяем сообщение.', async () => {
@@ -92,7 +92,7 @@ test.describe('Проверка функциональности на стран
         const statusMessage = 'Moved'
 
         await test.step('Нажимаем на ссылку "Moved".', async () => {
-            await linksPage.clickLink('moved')
+            await linksPage.clickLinkByName('moved')
         })
 
         await test.step('Проверяем сообщение.', async () => {
@@ -109,7 +109,7 @@ test.describe('Проверка функциональности на стран
         const statusMessage = 'Bad Request'
 
         await test.step('Нажимаем на ссылку "Bad Request".', async () => {
-            await linksPage.clickLink('bad-request')
+            await linksPage.clickLinkByName('bad-request')
         })
 
         await test.step('Проверяем сообщение.', async () => {
@@ -126,7 +126,7 @@ test.describe('Проверка функциональности на стран
         const statusMessage = 'Unauthorized'
 
         await test.step('Нажимаем на ссылку "Unauthorized".', async () => {
-            await linksPage.clickLink('unauthorized')
+            await linksPage.clickLinkByName('unauthorized')
         })
 
         await test.step('Проверяем сообщение.', async () => {
@@ -143,7 +143,7 @@ test.describe('Проверка функциональности на стран
         const statusMessage = 'Forbidden'
 
         await test.step('Нажимаем на ссылку "Forbidden".', async () => {
-            await linksPage.clickLink('forbidden')
+            await linksPage.clickLinkByName('forbidden')
         })
 
         await test.step('Проверяем сообщение.', async () => {
@@ -160,7 +160,7 @@ test.describe('Проверка функциональности на стран
         const statusMessage = 'Not Found'
 
         await test.step('Нажимаем на ссылку "Not Found".', async () => {
-            await linksPage.clickLink('invalid-url')
+            await linksPage.clickLinkByName('invalid-url')
         })
 
         await test.step('Проверяем сообщение.', async () => {
@@ -180,7 +180,7 @@ test.describe('Проверка функциональности на стран
 
 
         await test.step(`Нажимаем на ссылку ${initialLink}.`, async () => {
-            await linksPage.clickLink(initialLink)
+            await linksPage.clickLinkByName(initialLink)
 
         })
 
@@ -189,7 +189,7 @@ test.describe('Проверка функциональности на стран
         })
 
         await test.step(`Нажимаем на ссылку ${actualLink}.`, async () => {
-            await linksPage.clickLink(actualLink)
+            await linksPage.clickLinkByName(actualLink)
         })
 
         await test.step(`Сохраняем сообщение в ${actualLinkMessage}.`, async () => {

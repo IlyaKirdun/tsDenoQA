@@ -17,3 +17,5 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /tests/sandBox.spec.ts
+/testCases/
+.env

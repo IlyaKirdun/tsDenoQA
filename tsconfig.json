@@ -9,5 +9,14 @@
     "outDir": "dist",
     "strictFunctionTypes": true
   },
-  "include": ["src"]
+  "include": [
+    "tests//*.ts",
+    "Utils//*.ts",
+    "pageObjects/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "test-results",
+    "playwright.config.ts"
+  ]
 }

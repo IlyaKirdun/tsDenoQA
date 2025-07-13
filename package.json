@@ -1,6 +1,6 @@
 {
   "name": "demoqa",
-  "version": "1.6.12",
+  "version": "1.7.10",
   "description": "",
   "scripts": {
     "lint": "npx eslint",
@@ -16,5 +16,8 @@
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.35.1"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "dotenv": "^17.0.1"
+  }
 }

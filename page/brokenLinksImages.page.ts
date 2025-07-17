@@ -14,17 +14,24 @@ export default class brokenLinksImages {
   }
 
   async verifyImageByState(imageLocator: Locator, state: 'valid' | 'broken'): Promise<void> {
-    const src = await imageLocator.getAttribute('src');
-    const width = await imageLocator.locator(``).getAttribute('width');
+    const imageValues = await imageLocator.evaluate((image: HTMLImageElement) => {
+      return {
+        naturalWidth: image.naturalWidth,
+        naturalHeight: image.naturalHeight,
+        src: image.src,
+      }
+    })
+
+    expect(imageValues.src).toBe(imageLocator.getAttribute('src'))
 
     if(state === 'valid') {
-      expect(src).toBe('/images/Toolsqa.jpg');
-      expect(width).toBe('347');
+      expect(imageValues.naturalHeight).toBeGreaterThanOrEqual(1)
+      expect(imageValues.naturalWidth).toBeGreaterThanOrEqual(1)
     }
 
     if(state === 'broken') {
-      expect(src).toBe('/images/Toolsqa_1.jpg');
-      expect(width).toBe('16');
+      expect(imageValues.naturalHeight).toBeLessThanOrEqual(0)
+      expect(imageValues.naturalWidth).toBeLessThanOrEqual(0)
     }
   }
 

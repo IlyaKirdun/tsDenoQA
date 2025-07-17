@@ -1,10 +1,20 @@
 import {BrowserContext, expect, Locator, Page} from "@playwright/test"
 
-export default class brokenLinksImages {
+export default class BrokenLinksImages {
   page: Page
   context: BrowserContext
   validImage: Locator
   brokenImage: Locator
+
+  imagesDirection = {
+    valid: 'https://demoqa.com/images/Toolsqa.jpg',
+    broken: 'https://demoqa.com/images/Toolsqa_1.jpg'
+  }
+
+  urlList = {
+    valid: 'https://demoqa.com/',
+    broken: 'http://the-internet.herokuapp.com/status_codes/500',
+  }
 
   constructor(page: Page, context: BrowserContext) {
     this.page = page
@@ -18,11 +28,11 @@ export default class brokenLinksImages {
       return {
         naturalWidth: image.naturalWidth,
         naturalHeight: image.naturalHeight,
-        src: image.src,
+        src: image.src
       }
     })
 
-    expect(imageValues.src).toBe(imageLocator.getAttribute('src'))
+    expect(imageValues.src).toBe(this.imagesDirection[state])
 
     if(state === 'valid') {
       expect(imageValues.naturalHeight).toBeGreaterThanOrEqual(1)
@@ -35,20 +45,9 @@ export default class brokenLinksImages {
     }
   }
 
-  async clickAndVerifyLinkByName(linkName: 'Valid' | 'Broken'): Promise<void> {
-    const newPagePromise: Promise<Page> = this.context.waitForEvent('page')
-    const locatorLink: Locator = this.page.locator(`//a[text()="Click Here for ${linkName} Link"]`)
-    const urlLink: string | null = await locatorLink.getAttribute('href')
-
-    if (urlLink === null) {
-      process.exit(1)
-    }
+  async clickAndVerifyLinkByName(linkName: 'Valid' | 'Broken', state: 'valid' | 'broken'): Promise<void> {
 
     await this.page.locator(`//a[text()="Click Here for ${linkName} Link"]`).click()
-
-    const newPage: Page = await newPagePromise
-
-    await newPage.waitForURL(urlLink)
-    await expect(newPage).toHaveURL(urlLink)
+    await expect(this.page).toHaveURL(this.urlList[state])
   }
 }

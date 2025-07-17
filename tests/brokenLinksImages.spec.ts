@@ -27,21 +27,23 @@ test.describe('Проверка функциональности на стран
     })
   })
 
-  test('CASE_2: Проверяем правильное отображение изображения "Broken image".', async () => {
+  test('CASE_2: Проверяем сломанное изображения "Broken image".', async () => {
     await test.step('Проверяем отображение изображение "Broken image".', async () => {
       await brokenLinksImages.verifyImageByState(brokenLinksImages.brokenImage, 'broken')
     })
   })
 
   test('CASE_3: Проверяем ссылку "Valid link".', async () => {
+    const statusCode = 200
     await test.step('Нажимаем на ссылку "Valid link".', async () => {
-      await brokenLinksImages.clickAndVerifyLinkByName('Valid', 'valid')
+      await brokenLinksImages.clickAndVerifyLinkByName('Valid', 'valid', statusCode)
     })
   })
 
   test('CASE_4: Проверяем ссылку "Broken link".', async () => {
+    const statusCode = 500
     await test.step('Нажимаем на ссылку "Broken link".', async () => {
-      await brokenLinksImages.clickAndVerifyLinkByName('Broken', 'broken')
+      await brokenLinksImages.clickAndVerifyLinkByName('Broken', 'broken', statusCode)
     })
   })
 })

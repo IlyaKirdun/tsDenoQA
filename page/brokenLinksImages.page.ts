@@ -45,9 +45,13 @@ export default class BrokenLinksImages {
     }
   }
 
-  async clickAndVerifyLinkByName(linkName: 'Valid' | 'Broken', state: 'valid' | 'broken'): Promise<void> {
+  async clickAndVerifyLinkByName(linkName: 'Valid' | 'Broken', state: 'valid' | 'broken', statusCode: number): Promise<void> {
+    const response = this.page.waitForResponse(response =>
+      response.status() == statusCode
+    )
 
     await this.page.locator(`//a[text()="Click Here for ${linkName} Link"]`).click()
     await expect(this.page).toHaveURL(this.urlList[state])
+    await response
   }
 }

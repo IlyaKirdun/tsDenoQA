@@ -31,6 +31,10 @@ export default class UploadAndDownload {
     expect(fs.existsSync(this.downloadFilePath)).toBe(true)
   }
 
+  async deleteDownloadFile() {
+    fs.unlink(this.downloadFilePath, () => {})
+  }
+
   async clickUploadFileButtonAndSelectFile(): Promise<void> {
     await this.uploadFileButton.setInputFiles(path.join('utils/testFiles/fileForUpload.jpeg'))
   }

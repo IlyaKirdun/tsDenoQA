@@ -59,7 +59,7 @@ export function verifyFileExist(fileName: string, dir: string | undefined = proc
   const path: string = dir + fileName
 
   if (process.env.GITHUB_ACTIONS) {
-    expect(`downloads/${fileName}`).toBe(true)
+    expect(fs.existsSync(`downloads/${fileName}`)).toBe(true)
   } else {
     expect(fs.existsSync(path)).toBe(true)
   }

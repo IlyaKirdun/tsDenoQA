@@ -21,7 +21,11 @@ export default class UploadAndDownload {
     await this.downloadButton.click()
     const download = await downloadPromise
 
-    await download.saveAs(`${process.env.DOWNLOAD_FOLDER}/${download.suggestedFilename()}`)
+    if (process.env.GITHUB_ACTIONS){
+      await download.saveAs('downloads/' + download.suggestedFilename())
+    }else {
+      await download.saveAs(`${process.env.DOWNLOAD_FOLDER}/${download.suggestedFilename()}`)
+    }
   }
 
   async clickUploadFileButtonAndSelectFile(): Promise<void> {

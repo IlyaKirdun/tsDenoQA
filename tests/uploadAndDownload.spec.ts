@@ -2,7 +2,7 @@ import {test} from "@playwright/test"
 import MainPage from "../page/main.page"
 import NavigationBar from "../utils/components/navigationBar"
 import UploadAndDownload from "../page/uploadAndDownload.page"
-import {removeAds} from "../utils/functions"
+import {deleteFile, removeAds, verifyFileExist} from "../utils/functions"
 
 test.describe('Проверка функциональности на странице "Links', () => {
   let mainPage: MainPage
@@ -27,13 +27,7 @@ test.describe('Проверка функциональности на стран
     })
 
     await test.step('Проверяем наличие скаченного файла "sampleFile".', async () => {
-      await uploadAndDownload.verifyDownloadFile()
-    })
-
-    await test.step('Post-conditions', async () => {
-      await test.step('Удаляем скачанный файл "sampleFile"', async () => {
-        await uploadAndDownload.deleteDownloadFile()
-      })
+      verifyFileExist('sampleFile.jpeg')
     })
   })
 
@@ -46,5 +40,9 @@ test.describe('Проверка функциональности на стран
       const filePath: string = 'C:\\fakepath\\fileForUpload.jpeg'
       await uploadAndDownload.verifyUploadFilePath(filePath)
     })
+  })
+
+  test.afterAll(async () => {
+    deleteFile('sampleFile.jpeg')
   })
 })

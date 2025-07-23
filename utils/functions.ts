@@ -1,4 +1,5 @@
 import {Page, expect, Locator} from '@playwright/test'
+import fs from "fs";
 
 export async function removeAds(page: Page): Promise<void> {
   const extendAds:string[] = [
@@ -38,4 +39,24 @@ export function getParentNameByChildName<T> (obj: {[key: string]: T[]}, value: T
   }
   console.error(`Not found: ${value}`)
   return undefined
+}
+
+export function deleteFile (fileName: string, dir: string | undefined = process.env.DOWNLOAD_FOLDER): void {
+  const filePath: string = dir + fileName
+
+  try {
+    fs.unlinkSync(filePath)
+  } catch (err: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
+    if (err.code === 'ENOENT') {
+      console.log(`Файл ${filePath} не найден.`)
+    } else {
+      throw Error
+    }
+  }
+}
+
+export function verifyFileExist(fileName: string, dir: string | undefined = process.env.DOWNLOAD_FOLDER) {
+  const path: string = dir + fileName
+
+  expect(fs.existsSync(path)).toBe(true)
 }

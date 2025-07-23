@@ -4,7 +4,7 @@ import NavigationBar from "../utils/components/navigationBar"
 import UploadAndDownload from "../page/uploadAndDownload.page"
 import {deleteFile, removeAds, verifyFileExist} from "../utils/functions"
 
-test.describe('Проверка функциональности на странице "Links', () => {
+test.describe('Проверка функциональности на странице "Upload and Download"', () => {
   let mainPage: MainPage
   let navigationBar: NavigationBar
   let uploadAndDownload: UploadAndDownload

@@ -58,5 +58,9 @@ export function deleteFile (fileName: string, dir: string | undefined = process.
 export function verifyFileExist(fileName: string, dir: string | undefined = process.env.DOWNLOAD_FOLDER) {
   const path: string = dir + fileName
 
-  expect(fs.existsSync(path)).toBe(true)
+  if (process.env.GITHUB_ACTIONS) {
+    expect(`downloads/${fileName}`).toBe(true)
+  } else {
+    expect(fs.existsSync(path)).toBe(true)
+  }
 }

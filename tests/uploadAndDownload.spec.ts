@@ -21,7 +21,7 @@ test.describe('Проверка функциональности на стран
     await removeAds(page)
   })
 
-  test('CASE_1: Проверяем функционал кнопки "Download".', async ({}) => {
+  test('CASE_1: Проверяем функционал кнопки "Download".', async () => {
     test.skip(process.env.GITHUB_ACTIONS === 'true', 'Пропускаем проверку CI потому что не создастся папка Downloads')
     await test.step('Нажимаем кнопку "Download".', async () => {
       await uploadAndDownload.clickDownloadButton()

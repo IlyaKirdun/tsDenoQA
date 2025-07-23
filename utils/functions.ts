@@ -46,7 +46,7 @@ export function deleteFile (fileName: string, dir: string | undefined = process.
 
   try {
     fs.unlinkSync(filePath)
-  } catch (err: any) {
+  } catch (err: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
     if (err.code === 'ENOENT') {
       console.log(`Файл ${filePath} не найден.`)
     } else {

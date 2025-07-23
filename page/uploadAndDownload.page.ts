@@ -9,7 +9,7 @@ export default class UploadAndDownload {
   downloadButton: Locator
   uploadFilePath: Locator
 
-  downloadFilePath: string = 'utils/downloads/sampleFile.jpeg'
+  downloadFilePath: string = path.normalize('C:\\Users\\Rabbit\\Downloads\\sampleFile.jpeg')
 
   constructor(page: Page, context: BrowserContext) {
     this.page = page
@@ -24,7 +24,7 @@ export default class UploadAndDownload {
     await this.downloadButton.click()
     const download = await downloadPromise
 
-    await download.saveAs('utils/downloads/' + download.suggestedFilename())
+    await download.saveAs(this.downloadFilePath)
   }
 
   async verifyDownloadFile() {

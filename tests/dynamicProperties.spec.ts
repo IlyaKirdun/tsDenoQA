@@ -46,7 +46,7 @@ test.describe('Проверка функциональности на стран
     })
 
     await test.step('Ожидаем изменение состояния кнопки через 5 секунд.', async () => {
-      await dynamicProperties.verifyButtonState('toBeDisabled', 6000)
+      await dynamicProperties.verifyButtonState('toBeEnabled', 5000)
     })
   })
 
@@ -59,7 +59,7 @@ test.describe('Проверка функциональности на стран
     })
 
     await test.step('Ожидаем изменение цвета текста на "Красный" у кнопки через 5 секунд.', async () => {
-      await dynamicProperties.verifyButtonColor('red', 6000)
+      await dynamicProperties.verifyButtonColor('red', 5000)
     })
   })
 
@@ -72,7 +72,7 @@ test.describe('Проверка функциональности на стран
     })
 
     await test.step('Ожидаем отображение кнопки через 5 секунд.', async () => {
-      await dynamicProperties.verifyButtonVisibility('toBeVisible', 6000)
+      await dynamicProperties.verifyButtonVisibility('toBeVisible', 5000)
     })
   })
 })

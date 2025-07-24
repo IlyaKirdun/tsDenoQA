@@ -23,7 +23,6 @@ test.describe('Проверка функциональности на стран
 
   test('CASE_1: Проверяем текст с изменяемым ID', async ({page}) => {
     let initialTextId: string | null = ''
-    let actualTextId: string | null = ''
 
     await test.step(`Сохраняем ID текста в ${initialTextId}.`, async () => {
       initialTextId = await dynamicProperties.getTextId()
@@ -34,9 +33,7 @@ test.describe('Проверка функциональности на стран
     })
 
     await test.step(`Получаем ID и сравниваем с ${initialTextId}.`, async () => {
-      actualTextId = await dynamicProperties.getTextId()
-
-      expect(actualTextId).not.toBe(initialTextId)
+      expect(await dynamicProperties.getTextId()).not.toBe(initialTextId)
     })
   })
 

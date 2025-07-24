@@ -31,16 +31,22 @@ export default class DynamicProperties {
   }
 
   async verifyButtonState(state: ActionState, delay: number = 0): Promise<void> {
-    await expect(this.dynamicStateButton)[state]({ timeout: delay })
+    new Promise(resolve => setTimeout(resolve, delay))
+
+    await expect(this.dynamicStateButton)[state]()
   }
 
   async verifyButtonColor(color: 'red' | 'white', delay: number = 0): Promise<void> {
     const expectedColor = this.colorMap[color]
 
-    await expect(this.dynamicColorButton).toHaveCSS('color', expectedColor, { timeout: delay })
+    new Promise(resolve => setTimeout(resolve, delay))
+
+    await expect(this.dynamicColorButton).toHaveCSS('color', expectedColor)
   }
 
   async verifyButtonVisibility(state: VisibilityState, delay: number = 0): Promise<void> {
-    await expect(this.dynamicVisibilityButton)[state]({ timeout: delay })
+    new Promise(resolve => setTimeout(resolve, delay))
+
+    await expect(this.dynamicVisibilityButton)[state]()
   }
 }

@@ -35,6 +35,8 @@ export type ElementsOnMainPage =
 
 export type VisibilityState = 'toBeVisible'|'toBeHidden'
 
+export type ActionState = 'toBeEnabled' | 'toBeDisabled'
+
 export type locatorLinkNames =
     | 'created'
     | 'no-content'

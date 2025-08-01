@@ -1,0 +1,13 @@
+#!/bin/sh
+echo "🔍 Running ESLint before commit..."
+
+npm run lint
+status=$?
+
+if [ $status -ne 0 ]; then
+  echo "❌ Linting failed. Fix errors before committing!"
+  exit 1
+fi
+
+echo "✅ Linting passed. Proceeding with commit..."
+exit 0

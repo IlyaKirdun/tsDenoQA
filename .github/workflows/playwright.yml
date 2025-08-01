@@ -16,6 +16,8 @@ jobs:
     env:
       CI: true
       GITHUB_ACTIONS: true
+      QASE_TESTOPS_API_TOKEN: ${{ secrets.QASE_TESTOPS_API_TOKEN }}
+      QASE_TESTOPS_PROJECT: ${{ secrets.QASE_TESTOPS_PROJECT }}
       BASE_URL: ${{ secrets.BASE_URL }}
 
     steps:
@@ -38,4 +40,4 @@ jobs:
         continue-on-error: false
 
       - name: Run Playwright tests
-        run: npm run tests
+        run: npm run qase

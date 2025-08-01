@@ -72,7 +72,7 @@ test.describe('Проверка функциональности на стран
     })
 
     await test.step('Ожидаем отображение кнопки через 5 секунд.', async () => {
-      await dynamicProperties.verifyButtonVisibility('toBeVisible', 5000);;
+      await dynamicProperties.verifyButtonVisibility('toBeVisible', 5000)
     })
   })
 })

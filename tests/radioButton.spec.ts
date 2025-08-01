@@ -22,10 +22,13 @@ test.describe('Check the functioning of the "Radio Button" section', () => {
 
   test.beforeEach(async ({page}) => {
     mainPage = new MainPage(page)
+
+    const newPage = await mainPage.navigateToMainPage()
+    if (newPage !== page) { page = newPage }
+
     radioButtonPage = new RadioButtonPage(page)
     navigationBar = new NavigationBar(page)
 
-    await mainPage.navigateToMainPage()
     await removeAds(page)
     await mainPage.clickOnElement('Elements')
     await navigationBar.clickElementInNavigationBar('Radio Button')

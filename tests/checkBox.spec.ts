@@ -44,10 +44,13 @@ test.describe('Check the functioning of the "Check Box" section', () => {
 
   test.beforeEach(async ({ page }) => {
     mainPage = new MainPage(page)
+
+    const newPage = await mainPage.navigateToMainPage()
+    if (newPage !== page) { page = newPage }
+
     checkBoxPage = new CheckBoxPage(page)
     navigationBar = new NavigationBar(page)
 
-    await mainPage.navigateToMainPage()
     await removeAds(page)
     await mainPage.clickOnElement('Elements')
     await navigationBar.clickElementInNavigationBar('Check Box')

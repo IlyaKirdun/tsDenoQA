@@ -44,11 +44,14 @@ test.describe('Проверка функциональности на стран
 
   test.beforeEach(async ({ page }) => {
     mainPage = new MainPage(page)
+
+    const newPage = await mainPage.navigateToMainPage()
+    if (newPage !== page) { page = newPage }
+
     webTablesPage = new WebTablesPage(page)
     navigationBar = new NavigationBar(page)
     registrationModalWindow = new RegistrationModalWindow(page)
 
-    await mainPage.navigateToMainPage()
     await removeAds(page)
     await mainPage.clickOnElement('Elements')
     await navigationBar.clickElementInNavigationBar('Web Tables')

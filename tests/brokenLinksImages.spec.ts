@@ -11,10 +11,13 @@ test.describe('Проверка функциональности на стран
 
   test.beforeEach(async ({ page , context}) => {
     mainPage = new MainPage(page)
+
+    const newPage = await mainPage.navigateToMainPage()
+    if (newPage !== page) { page = newPage }
+
     navigationBar = new NavigationBar(page)
     brokenLinksImages = new BrokenLinksImages(page, context)
 
-    await mainPage.navigateToMainPage()
     await removeAds(page)
     await mainPage.clickOnElement('Elements')
     await navigationBar.clickElementInNavigationBar('Broken Links - Images')

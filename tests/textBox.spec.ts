@@ -18,10 +18,13 @@ test.describe('Check the functioning of the "Text Box" section', () => {
 
   test.beforeEach(async ({ page }) => {
     mainPage = new MainPage(page)
+
+    const newPage = await mainPage.navigateToMainPage()
+    if (newPage !== page) { page = newPage }
+
     textBoxPage = new TextBoxPage(page)
     navigationBar = new NavigationBar(page)
 
-    await mainPage.navigateToMainPage()
     await removeAds(page)
     await mainPage.clickOnElement('Elements')
     await navigationBar.clickElementInNavigationBar('Text Box')

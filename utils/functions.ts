@@ -7,14 +7,16 @@ export async function removeAds(page: Page): Promise<void> {
     '//div[@id="Ad.Plus-970x250-1"]',
     '//div[@id="Ad.Plus-970x250-2"]',
     '//div[@class="sidebar-content pattern-background shadow widget-divider-off"]',
+    '//section[@id="RightSide_Advertisement"]'
   ]
+
+  await page.waitForLoadState('load')
+  await new Promise(resolve => setTimeout(resolve, 1000))
 
   for (const ads of extendAds) {
     const loc: Locator = page.locator(ads)
 
-    await page.waitForLoadState()
-
-    if(await loc.isVisible() ){
+    if(await loc.isVisible()){
       await loc.evaluate((elem: SVGAElement | HTMLBRElement): void => elem.remove())
     }
   }

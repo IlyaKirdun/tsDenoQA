@@ -5,10 +5,6 @@ export default class DatePicker {
   page: Page
   selectDateInput: Locator
   dateAndTimeInput: Locator
-  selectMenuMonth: Locator
-  selectMenuYear: Locator
-  dropdownMenuMonth: Locator
-  dropdownMenuYear: Locator
   monthYearNavigationOutput: Locator
 
   colorMap: { [key: string] : string } = {
@@ -19,10 +15,6 @@ export default class DatePicker {
     this.page = page
     this.selectDateInput = this.page.locator('//input[@id="datePickerMonthYearInput"]')
     this.dateAndTimeInput = this.page.locator('//input[@id="dateAndTimePickerInput"]')
-    this.selectMenuMonth = this.page.locator('//div[@id="datePickerMonthYear"]//select[contains(@class, "month")]')
-    this.selectMenuYear = this.page.locator('//div[@id="datePickerMonthYear"]//select[contains(@class, "year")]')
-    this.dropdownMenuMonth = this.page.locator('//div[@id="dateAndTimePicker"]//div[contains(@class, "month-dropdown")]')
-    this.dropdownMenuYear = this.page.locator('//div[@id="dateAndTimePicker"]//div[contains(@class, "year-dropdown")]')
     this.monthYearNavigationOutput = this.page.locator('//div[@id="datePickerMonthYear"]//div[contains(@class, "header")]/div[contains(@class, "current-month")]')
   }
 
@@ -69,14 +61,13 @@ export default class DatePicker {
     await this.page.locator(`(//div[@class="react-datepicker__month"]//div[text()="${day}"])`)[firstOrLast]().click()
   }
 
-  async selectMonthInDropdownMenu(month: string): Promise<void> {
-    await this.dropdownMenuMonth.click()
-    await this.page.locator(`//div[contains(@class, "month-dropdown")]/div[text()="${month}"]`).click()
+  async pickSelectMenuByName(menuName: 'month' | 'year', value: string): Promise<void> {
+    await this.page.locator(`//div[@id="datePickerMonthYear"]//select[contains(@class, "${menuName}")]`).selectOption(value)
   }
 
-  async selectYearInDropdownMenu(year: number): Promise<void> {
-    await this.dropdownMenuYear.click()
-    await this.page.locator(`//div[contains(@class, "year-dropdown")]/div[text()="${year}"]`).click()
+  async pickDropdownMenuByName(menuName: 'month' | 'year', value: string | number): Promise<void> {
+    await this.page.locator(`//div[@id="dateAndTimePicker"]//div[contains(@class, "${menuName}-dropdown")]`).click()
+    await this.page.locator(`//div[contains(@class, "${menuName}-dropdown")]/div[text()="${value}"]`).click()
   }
 }
 

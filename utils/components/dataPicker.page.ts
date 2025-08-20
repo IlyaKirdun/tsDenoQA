@@ -1,5 +1,5 @@
 import {expect, Locator, Page} from "@playwright/test"
-import {VisibilityState} from "../types";
+import {MonthList, VisibilityState} from "../types";
 
 export default class DatePicker {
   page: Page
@@ -61,13 +61,12 @@ export default class DatePicker {
     await this.page.locator(`(//div[@class="react-datepicker__month"]//div[text()="${day}"])`)[firstOrLast]().click()
   }
 
-  async pickSelectMenuByName(menuName: 'month' | 'year', value: string): Promise<void> {
-    await this.page.locator(`//div[@id="datePickerMonthYear"]//select[contains(@class, "${menuName}")]`).selectOption(value)
+  async selectMonthOrYearInSelectMenu(menuName: 'month' | 'year', value: MonthList | number): Promise<void> {
+    await this.page.locator(`//div[@id="datePickerMonthYear"]//select[contains(@class, "${menuName}")]`).selectOption(`${value}`)
   }
 
-  async pickDropdownMenuByName(menuName: 'month' | 'year', value: string | number): Promise<void> {
-    await this.page.locator(`//div[@id="dateAndTimePicker"]//div[contains(@class, "${menuName}-dropdown")]`).click()
-    await this.page.locator(`//div[contains(@class, "${menuName}-dropdown")]/div[text()="${value}"]`).click()
+  async selectMonthOrYearInDropdownMenu(menuName: 'month' | 'year', value: MonthList | number): Promise<void> {
+    await this.page.locator(`//div[@id="dateAndTimePicker"]//div[contains(@class, "${menuName}")]`).click()
+    await this.page.locator(`//div[contains(@class, "${menuName}")]/div[text()="${value}"]`).click()
   }
 }
-

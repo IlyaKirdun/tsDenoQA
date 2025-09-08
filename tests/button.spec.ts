@@ -46,7 +46,7 @@ test.describe('Проверка функциональности на стран
     })
   })
 
-  test('CASE_3: Проверка функционала кнопки "Click Me".', async ({}) => {
+  test('CASE_3: Проверка функционала кнопки "Click Me".', async () => {
     let initialButtonId: string = ''
     let actualButtonId: string = ''
 

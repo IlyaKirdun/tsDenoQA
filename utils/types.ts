@@ -46,5 +46,19 @@ export type locatorLinkNames =
     | 'forbidden'
     | 'invalid-url'
 
+export type MonthList =
+  | 'January'
+  | 'February'
+  | 'March'
+  | 'April'
+  | 'May'
+  | 'June'
+  | 'July'
+  | 'August'
+  | 'September'
+  | 'October'
+  | 'November'
+  | 'December';
+
 
 

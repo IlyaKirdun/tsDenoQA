@@ -10,7 +10,7 @@ export async function removeAds(page: Page): Promise<void> {
     '//section[@id="RightSide_Advertisement"]'
   ]
 
-  await page.waitForLoadState('load')
+  await page.waitForLoadState('domcontentloaded')
   await new Promise(resolve => setTimeout(resolve, 1000))
 
   for (const ads of extendAds) {
@@ -23,8 +23,8 @@ export async function removeAds(page: Page): Promise<void> {
 }
 
 export async function assertByState(
-    actual: string | number,
-    expected: string | number,
+    actual: string | number | null,
+    expected: string | number | null,
     state: 'match' | 'notMatch' = 'match'
 ): Promise<void> {
   // выбираем нужный expect: либо обычный, либо с .not

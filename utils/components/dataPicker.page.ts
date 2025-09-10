@@ -6,6 +6,7 @@ export default class DatePicker {
   selectDateInput: Locator
   dateAndTimeInput: Locator
   monthYearNavigationOutput: Locator
+  lastYearInDropdownMenu: Locator
 
   colorMap: { [key: string] : string } = {
     blue: 'rgb(33, 107, 165)',
@@ -16,6 +17,7 @@ export default class DatePicker {
     this.selectDateInput = this.page.locator('//input[@id="datePickerMonthYearInput"]')
     this.dateAndTimeInput = this.page.locator('//input[@id="dateAndTimePickerInput"]')
     this.monthYearNavigationOutput = this.page.locator('//div[contains(@class, "header")]/div[contains(@class, "current-month")]')
+    this.lastYearInDropdownMenu = this.page.locator('//div[contains(@class, "year-dropdown")]//div[contains(@class, "year-option")][12]')
   }
 
   getCurrentDateForSelectDate() {
@@ -32,11 +34,19 @@ export default class DatePicker {
     return `${formatedDate} ${formatedTime}`
   }
 
+  async getCurrentMonthOrYearInDropdownMenu(menuName: 'month' | 'year') {
+      return await this.page.locator(`//span[contains(@class, "selected-${menuName}")]`).innerText()
+  }
+
+  async getCurrentMonthOrYearInSelectMenu(menuName: 'month' | 'year') {
+    return await this.page.locator(`//select[contains(@class,"${menuName}")]`).inputValue()
+  }
+
   async verifyMonthOrYearInSelectMenu(menuName: 'month' | 'year', valueMonthOrYear: string){
     await expect(this.page.locator(`//select[contains(@class,"${menuName}")]`)).toHaveValue(valueMonthOrYear)
   }
 
-  async verifyMonthOrYearInDropdownMenu(menuName: 'month' | 'year', value: MonthList | number){
+  async verifyMonthOrYearInDropdownMenu(menuName: 'month' | 'year', value: MonthList | number | string | null){
     expect(await this.page.locator(`//span[contains(@class, "selected-${menuName}")]`).innerText()).toBe(`${value}`)
   }
 
@@ -46,11 +56,22 @@ export default class DatePicker {
     await expect(tab)[state]()
   }
 
-  async verifyDayColor(dayNumber: string, color: string = this.colorMap.blue): Promise<void> {
+  async verifyDayColor(dayNumber: number, color: string = this.colorMap.blue): Promise<void> {
     const day: Locator = this.page.locator(`//div[contains(@class, "day--selected")][text()="${dayNumber}"]`)
     const currentColor: string = await day.evaluate(el => getComputedStyle(el).backgroundColor)
 
     expect(currentColor).toBe(color)
+  }
+
+  async verifyTimeColor(time: string, color: string = this.colorMap.blue): Promise<void> {
+    const element: Locator = this.page.locator(`//li[contains(text(),"${time}")]`)
+    const currentColor: string = await element.evaluate(el => getComputedStyle(el).backgroundColor)
+
+    expect(currentColor).toBe(color)
+  }
+
+  async clickMonthOrYearDropdownMenu(menuName: 'month' | 'year') {
+    return await this.page.locator(`//span[contains(@class, "selected-${menuName}")]`).click()
   }
 
   async clickNavigationMonthButtonByAction(action: 'Previous' | 'Next'): Promise<void> {
@@ -63,14 +84,19 @@ export default class DatePicker {
     await this.page.locator(`//div[contains(@class, "year-dropdown")]//div[contains(@class, "year-option")]`)[nextOrPrevious]().click()
   }
 
-  async clickEnterOnKeyboard(): Promise<void> {
-    await this.selectDateInput.press('Enter')
+  async clickEnterOnKeyboard(locatorName: 'selectDateInput' | 'dateAndTimeInput'): Promise<void> {
+    await this[locatorName].press('Enter')
   }
 
   async selectDayByNumber(day: number): Promise<void> {
-    const firstOrLast = day >= 15 ? 'first' : 'last'
+    const firstOrLast: 'first' | 'last' = day <= 15 ? 'first' : 'last'
+    const element: Locator = this.page.locator(`(//div[@class="react-datepicker__month"]//div[text()="${day}"])`)[firstOrLast]()
 
-    await this.page.locator(`(//div[@class="react-datepicker__month"]//div[text()="${day}"])`)[firstOrLast]().click()
+    await element.dispatchEvent('click')
+  }
+
+  async selectTimeByNumber(time: string): Promise<void> {
+    await this.page.locator(`//li[contains(text(),"${time}")]`).click()
   }
 
   async selectMonthOrYearInSelectMenu(menuName: 'month' | 'year', value: MonthList | number): Promise<void> {

@@ -1,7 +1,7 @@
 import {expect, test} from "@playwright/test"
 import MainPage from "../../page/main.page"
 import DatePicker from "../../utils/components/dataPicker.page";
-import {removeAds} from "../../utils/functions";
+import {assertByState, removeAds} from "../../utils/functions";
 import NavigationBar from "../../utils/components/navigationBar";
 import {MonthList} from "../../utils/types";
 
@@ -9,21 +9,6 @@ test.describe('Проверка функциональности на стран
   let mainPage: MainPage
   let navigationBar: NavigationBar
   let datePicker: DatePicker
-
-  const monthList: string[] = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ]
 
   test.beforeEach(async ({page}) => {
     mainPage = new MainPage(page)
@@ -49,7 +34,7 @@ test.describe('Проверка функциональности на стран
   test('CASE_2: Проверяем функционал ручного ввода даты в "Select Date".', async () => {
     const date: string = '1 1 2011'
     const expectedDate: string = '01/01/2011'
-    const day: string = '1'
+    const day: number = 1
     const stringMonth: MonthList = 'January'
     const numberMonth: number = 1
     const year: string = '2011'
@@ -91,7 +76,7 @@ test.describe('Проверка функциональности на стран
     })
 
     await test.step('Нажимаем клавишу "Ввод".', async () => {
-      await datePicker.clickEnterOnKeyboard()
+      await datePicker.clickEnterOnKeyboard('selectDateInput')
     })
 
     await test.step('Проверяем что модальное окно закрылось.', async () => {
@@ -140,10 +125,11 @@ test.describe('Проверка функциональности на стран
   })
 
   test('CASE_4: Проверяем пагинацию дней месяца в "Select Date".', async () => {
-    let month: string = ''
+    let initialMonth: string = ''
+    let currentMonth: string = ''
 
     await test.step('Pre-condition', async () => {
-      await test.step('Нажимаем на виджет "Select date".', async () => {
+      await test.step('Нажимаем на виджет "Date And Time".', async () => {
         await datePicker.selectDateInput.click()
       })
 
@@ -152,44 +138,30 @@ test.describe('Проверка функциональности на стран
       })
     })
 
-    await test.step(`Сохраняем текущий месяц в ${month}.`, async () => {
-      month = await datePicker.selectDateInput.inputValue()
+    await test.step(`Сохраняем текущий месяц в ${initialMonth}.`, async () => {
+      initialMonth = await datePicker.getCurrentMonthOrYearInSelectMenu('month')
     })
 
     await test.step('Нажимаем кнопку "Предыдущий месяц".', async () => {
       await datePicker.clickNavigationMonthButtonByAction('Previous')
     })
 
-    await test.step('Проверяем корректное отображение месяца в селект меню "Month".', async () => {
-      await datePicker.verifyDataPickerTabByState('datePickerMonthYear', 'toBeVisible')
+    await test.step(`Сравниваем текущий месяц с ${initialMonth}.`, async () => {
+      currentMonth = await datePicker.getCurrentMonthOrYearInSelectMenu('month')
+      await assertByState(initialMonth, currentMonth, 'notMatch')
     })
 
-    await test.step('Проверяем корректное отображение месяца в шапке пагинации.', async () => {
-      await datePicker.verifyDataPickerTabByState('datePickerMonthYear', 'toBeVisible')
-    })
-
-    await test.step(`Сравниваем текущий месяц с ${month}.`, async () => {
-      await datePicker.verifyDataPickerTabByState('datePickerMonthYear', 'toBeVisible')
-    })
-
-    await test.step(`Сохраняем текущий месяц в ${month}.`, async () => {
-      await datePicker.verifyDataPickerTabByState('datePickerMonthYear', 'toBeVisible')
+    await test.step(`Сохраняем текущий месяц в ${initialMonth}.`, async () => {
+      initialMonth = await datePicker.getCurrentMonthOrYearInSelectMenu('month')
     })
 
     await test.step('Нажимаем кнопку "Следующий месяц".', async () => {
-      await datePicker.verifyDataPickerTabByState('datePickerMonthYear', 'toBeVisible')
+      await datePicker.clickNavigationMonthButtonByAction('Next')
     })
 
-    await test.step('Проверяем корректное отображение месяца в селект меню "Month".', async () => {
-      await datePicker.verifyDataPickerTabByState('datePickerMonthYear', 'toBeVisible')
-    })
-
-    await test.step('Проверяем корректное отображение месяца в шапке пагинации.', async () => {
-      await datePicker.verifyDataPickerTabByState('datePickerMonthYear', 'toBeVisible')
-    })
-
-    await test.step('Сравниваем текущий месяц с ${month}.', async () => {
-      await datePicker.verifyDataPickerTabByState('datePickerMonthYear', 'toBeVisible')
+    await test.step(`Сравниваем текущий месяц с ${initialMonth}.`, async () => {
+      currentMonth = await datePicker.getCurrentMonthOrYearInSelectMenu('month')
+      await assertByState(initialMonth, currentMonth, 'notMatch')
     })
   })
 
@@ -279,6 +251,248 @@ test.describe('Проверка функциональности на стран
 
     await test.step('Проверяем корректное отображение месяца и года в шапке пагинации.', async () => {
       expect(`${month} ${year}`).toBe(await datePicker.monthYearNavigationOutput.textContent())
+    })
+  })
+
+  test('CASE_8: Проверяем пагинацию дней месяца виджета "Data And Time".', async () => {
+    let initialMonth: string = ''
+    let currentMonth: string = ''
+
+    await test.step('Pre-condition', async () => {
+      await test.step('Нажимаем на виджет "Date And Time".', async () => {
+        await datePicker.dateAndTimeInput.click()
+      })
+
+      await test.step('Проверяем что модальное окно открылось.', async () => {
+        await datePicker.verifyDataPickerTabByState('dateAndTimePicker', 'toBeVisible')
+      })
+    })
+
+    await test.step(`Сохраняем текущий месяц в ${initialMonth}.`, async () => {
+      initialMonth = await datePicker.getCurrentMonthOrYearInDropdownMenu('month')
+    })
+
+    await test.step('Нажимаем кнопку "Предыдущий месяц".', async () => {
+      await datePicker.clickNavigationMonthButtonByAction('Previous')
+    })
+
+    await test.step(`Сравниваем текущий месяц с ${initialMonth}.`, async () => {
+      currentMonth = await datePicker.getCurrentMonthOrYearInDropdownMenu('month')
+      await assertByState(initialMonth, currentMonth, 'notMatch')
+    })
+
+    await test.step(`Сохраняем текущий месяц в ${initialMonth}.`, async () => {
+      initialMonth = await datePicker.getCurrentMonthOrYearInDropdownMenu('month')
+    })
+
+    await test.step('Нажимаем кнопку "Следующий месяц".', async () => {
+      await datePicker.clickNavigationMonthButtonByAction('Next')
+    })
+
+    await test.step(`Сравниваем текущий месяц с ${initialMonth}.`, async () => {
+      currentMonth = await datePicker.getCurrentMonthOrYearInDropdownMenu('month')
+      await assertByState(initialMonth, currentMonth, 'notMatch')
+    })
+  })
+
+  test('CASE_9: Проверка выбора дня месяца виджета "Date And Time".', async () => {
+    let initialDate: string = ''
+    let currentDate: string = ''
+    const day: number = 15
+
+    await test.step(`Сохраняем текущую дату в ${currentDate}`, async () => {
+      initialDate = await datePicker.dateAndTimeInput.inputValue()
+    })
+
+    await test.step('Нажимаем на виджет "Date And Time".', async () => {
+      await datePicker.dateAndTimeInput.click()
+    })
+
+    await test.step('Проверяем что модальное окно открылось.', async () => {
+      await datePicker.verifyDataPickerTabByState('dateAndTimePicker', 'toBeVisible')
+    })
+
+    await test.step(`Выбираем ${day}.`, async () => {
+      await datePicker.selectDayByNumber(day)
+    })
+
+    await test.step(`Проверка изменения цвета ${day}.`, async () => {
+      await datePicker.verifyDayColor(day)
+    })
+
+    await test.step(`Сравниваем дату в поле виджета с ${currentDate}.`, async () => {
+      currentDate = await datePicker.dateAndTimeInput.inputValue()
+
+      await assertByState(currentDate, initialDate, 'notMatch')
+    })
+  })
+
+  test('CASE_10: Проверка функционала выбора даты виджета "Data And Time".', async () => {
+    const expectedDate: string = 'June 1, 2022 1:00 PM'
+    const day: number = 1
+    const month: MonthList = 'June'
+    const year: number = 2022
+    const time: string = '13:00'
+
+    await test.step('Нажимаем на виджет "Date And Time".', async () => {
+      await datePicker.dateAndTimeInput.click()
+    })
+
+    await test.step('Проверяем что модальное окно открылось.', async () => {
+      await datePicker.verifyDataPickerTabByState('dateAndTimePicker', 'toBeVisible')
+    })
+
+    await test.step(`Выбираем ${month} в выпадающем меню "Month".`, async () => {
+      await datePicker.selectMonthOrYearInDropdownMenu('month', month)
+    })
+
+    await test.step('Проверяем корректное отображение месяца в выпадающем меню "Month".', async () => {
+      await datePicker.verifyMonthOrYearInDropdownMenu('month', month)
+    })
+
+    await test.step(`Выбираем ${year} в выпадающем меню "Year".`, async () => {
+      await datePicker.selectMonthOrYearInDropdownMenu('year', year)
+    })
+
+    await test.step('Проверяем корректное отображение года в выпадающем меню "Year".', async () => {
+      await datePicker.verifyMonthOrYearInDropdownMenu('year', year)
+    })
+
+    await test.step('Проверяем корректное отображение месяца и года в шапке пагинации.', async () => {
+      expect(`${month} ${year}`).toBe(await datePicker.monthYearNavigationOutput.textContent())
+    })
+
+    await test.step(`Выбираем ${day}.`, async () => {
+      await datePicker.selectDayByNumber(day)
+    })
+
+    await test.step(`Проверка изменения цвета ${day}.`, async () => {
+      await datePicker.verifyDayColor(day)
+    })
+
+    await test.step(`Выбираем ${time} в списке времени.`, async () => {
+      await datePicker.selectTimeByNumber(time)
+    })
+
+    await test.step('Проверяем что модальное окно закрылось.', async () => {
+      await datePicker.verifyDataPickerTabByState('dateAndTimePicker', 'toBeHidden')
+    })
+
+    await test.step('Проверяем корректное отображение даты.', async () => {
+      expect(await datePicker.dateAndTimeInput.inputValue()).toBe(expectedDate)
+    })
+
+    await test.step('Нажимаем на виджет "Date And Time".', async () => {
+      await datePicker.dateAndTimeInput.click()
+    })
+
+    await test.step(`Проверка изменения цвета ${time}`, async () => {
+      await datePicker.verifyTimeColor(time)
+    })
+  })
+
+  test('CASE_11: Проверка ручного ввода даты виджета "Date And Time".', async () => {
+    const date: string = '4 20,2015 13:00'
+    const expectedDate: string = 'April 20, 2015 1:00 PM'
+    const time: string = '13:00'
+    const day: number = 20
+    const month: MonthList = 'April'
+    const year: number = 2015
+
+    await test.step('Нажимаем на виджет "Date And Time".', async () => {
+      await datePicker.dateAndTimeInput.click()
+    })
+
+    await test.step('Проверяем что модальное окно открылось.', async () => {
+      await datePicker.verifyDataPickerTabByState('dateAndTimePicker', 'toBeVisible')
+    })
+
+    await test.step('Очищаем поле ввода.', async () => {
+      await datePicker.dateAndTimeInput.fill('')
+    })
+
+    await test.step(`Вводим дату из ${date}`, async () => {
+      await datePicker.dateAndTimeInput.fill(date)
+    })
+
+    await test.step('Проверяем правильное отображение в поле ввода.', async () => {
+      expect(date).toBe(await datePicker.dateAndTimeInput.getAttribute('value'))
+    })
+
+    await test.step('Проверяем корректное отображение месяца в выпадающем меню "Month".', async () => {
+      await datePicker.verifyMonthOrYearInDropdownMenu('month', month)
+    })
+
+    await test.step('Проверяем корректное отображение года в выпадающем меню "Year".', async () => {
+      await datePicker.verifyMonthOrYearInDropdownMenu('year', year)
+    })
+
+    await test.step('Проверяем корректное отображение месяца и года в шапке пагинации.', async () => {
+      expect(`${month} ${year}`).toBe(await datePicker.monthYearNavigationOutput.textContent())
+    })
+
+    await test.step(`Проверяем выделение ${day}.`, async () => {
+      await datePicker.verifyDayColor(day)
+    })
+
+    await test.step(`Проверяем выделение ${time}.`, async () => {
+      await datePicker.verifyTimeColor(time)
+    })
+
+    await test.step('Нажимаем клавишу "Ввод".', async () => {
+      await datePicker.clickEnterOnKeyboard('dateAndTimeInput')
+    })
+
+    await test.step('Проверяем что модальное окно закрылось.', async () => {
+      await datePicker.verifyDataPickerTabByState('dateAndTimePicker', 'toBeHidden')
+    })
+
+    await test.step('Проверяем корректное отображение даты.', async () => {
+      expect(await datePicker.dateAndTimeInput.inputValue()).toBe(expectedDate)
+    })
+  })
+
+  test('CASE_12: Проверка функционала выпадающего меню года в "Date And Time".', async () => {
+    let year: string | null = ''
+
+    await test.step('Pre-condition', async () => {
+      await test.step('Нажимаем на виджет "Date And Time".', async () => {
+        await datePicker.dateAndTimeInput.click()
+      })
+
+      await test.step('Проверяем что модальное окно открылось.', async () => {
+        await datePicker.verifyDataPickerTabByState('dateAndTimePicker', 'toBeVisible')
+      })
+    })
+
+    await test.step('Открываем выпадающее меню "Year"', async () => {
+      await datePicker.clickMonthOrYearDropdownMenu('year')
+    })
+
+    await test.step(`Сохраняем последний год из списка в ${year}`, async () => {
+      year = await datePicker.lastYearInDropdownMenu.textContent()
+    })
+
+    await test.step('Нажимаем кнопку "Следующий год"', async () => {
+      await datePicker.clickNavigationYearDropdownMenuButtonByAction('next')
+    })
+
+    await test.step(`Сравниваем последний год из списка с ${year}`, async () => {
+      const currentYear: string | null = await datePicker.lastYearInDropdownMenu.textContent()
+      await assertByState(currentYear,year,'notMatch')
+    })
+
+    await test.step(`Сохраняем последний год из списка в ${year}`, async () => {
+      year = await datePicker.lastYearInDropdownMenu.textContent()
+    })
+
+    await test.step('Нажимаем кнопку "Предыдущий год"', async () => {
+      await datePicker.clickNavigationYearDropdownMenuButtonByAction('previous')
+    })
+
+    await test.step(`Сравниваем последний год из списка с ${year}`, async () => {
+      const currentYear: string | null = await datePicker.lastYearInDropdownMenu.textContent()
+      await assertByState(currentYear,year,'notMatch')
     })
   })
 })
